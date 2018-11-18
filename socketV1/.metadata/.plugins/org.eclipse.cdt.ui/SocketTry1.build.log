@@ -1,0 +1,18 @@
+01:58:56 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+
+01:58:57 Build Finished. 0 errors, 0 warnings. (took 783ms)
+

@@ -1,0 +1,38 @@
+/*
+ * sockClient.h
+ *
+ *  Created on: Nov 17, 2018
+ *      Author: programmer
+ */
+#include <iostream>;
+#include <stdio.h>	//printf
+#include <string.h> //strlen
+#include <string>	//string
+#include <sys/socket.h>	//socket
+#include <arpa/inet.h>	//inet_addr
+#include <netdb.h>	//hostent
+
+
+using namespace std;
+
+#ifndef SOCKCLIENT_H_
+#define SOCKCLIENT_H_
+
+
+class sockClient
+{
+private:
+	int sock; //socket
+	string address; //ip
+	int port; //port
+	struct sockaddr_in server; //hint for server
+
+public:
+	sockClient();
+	int createSock(sockClient sc);
+	bool connect(string, int); //connect to socket
+	bool send(string data); //send
+	string receive(int); //receive
+};
+
+#endif /* SOCKCLIENT_H_ */
