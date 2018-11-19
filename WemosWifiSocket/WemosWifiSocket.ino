@@ -72,23 +72,27 @@ void loop() {
       if (receivedData[0] != '\0') {
         receivedData[rdIndex] = '\0'; //Add terminate string indicator
         //switch met int waardes woorden of meerdere ifs met sting.equals(string2); mayb naar functie(string s) verplaatsen
-        if (receivedData[0] >= 48 && receivedData[0] <= 57)//case van maken voor meerder opties. werkt wel met [0] maar niet met string
+
+        if (receivedData[1] == '\0') //if second char is end of line
         {
-          setIOOutput(receivedData[0] - 48); //ascii to dec/hex 
+          if (receivedData[0] >= 48 && receivedData[0] <= 57)//case van maken voor meerder opties. werkt wel met [0] maar niet met string
+          {
+            setIOOutput(receivedData[0] - 48); //ascii to dec/hex
+          }
+          else if (receivedData[0] >= 97 && receivedData[0] <= 102) {
+            setIOOutput(receivedData[0] - 87); //ascii to hex
+          }
         }
-        else if (receivedData[0] >= 97 && receivedData[0] <= 102){
-          setIOOutput(receivedData[0] - 87); //ascii to hex
-        }
-        else if(strcmp(receivedData, "switches")== 0){ //if string matches
+        else if (strcmp(receivedData, "switches") == 0) { //if string matches
           client.print(readIO() & 0x0F);
         }
         else
         {
-          client.print(receivedData); //feedback to client
+          client.print(receivedData); //Unknown command, echo to client
         }
-        
+
         rdIndex = 0; //reset index
-        receivedData[0] = '\0';
+        receivedData[0] = '\0'; //set start of string as end of string
 
       }
       while (client.available() > 0) { //while data from client availabel
