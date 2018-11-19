@@ -5,12 +5,7 @@
  *      Author: programmer
  */
 #include <iostream>
-#include <stdio.h>	//printf
-#include <string.h> //strlen
-#include <string>	//string
-#include <sys/socket.h>	//socket
-#include <arpa/inet.h>	//inet_addr
-#include <netdb.h>	//hostent
+
 
 
 using namespace std;
@@ -25,13 +20,13 @@ private:
 
 	string address; //ip
 	int port; //port
-
+	int sock; //socket
 
 
 
 public: //sockclient pointer? parameter or this.?
 
-	int sock; //socket
+
 	sockaddr_in server; //hint for server
 
 

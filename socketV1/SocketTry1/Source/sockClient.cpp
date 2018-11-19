@@ -56,9 +56,9 @@ int sockClient::createSock(sockClient* sc)
 	if (sc->sock == -1) //Failed to create socket
 	{
 		cerr << "Failed to create socket" << endl;
-		return 1;
+		return -1;
 	}
-	return 0;
+	return sc->sock;
 }
 
 //create hint structure for the server we want to connect with./////////
@@ -80,7 +80,10 @@ bool sockClient::connectToServer(sockaddr_in sa, sockClient* sc)
 		cerr << " unable to connect" <<endl;
 		return false;
 	}
-	return true;
+	else
+	{
+		return connection;
+	}
 }
 
 bool sockClient::sendToServer(string data) //send
@@ -104,7 +107,7 @@ string sockClient::receiveFromServer(sockClient* sc) //receive
 {
 
 	struct timeval tv; //timeout settings for receive timeout
-		tv.tv_sec = 5; //seconds
+		tv.tv_sec = 3; //seconds
 		tv.tv_usec = 0; //mircoseconds
 
 	setsockopt(sc->sock, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv));
@@ -119,7 +122,7 @@ string sockClient::receiveFromServer(sockClient* sc) //receive
 	}
 	else //print received data
 	{
-		cout << "Sever> " << string(buffer, dataReceived) << endl;
+		cout << "Server> " << string(buffer, dataReceived) << endl;
 	}
 
 	return buffer;

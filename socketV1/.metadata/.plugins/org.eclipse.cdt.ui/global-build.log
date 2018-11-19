@@ -3684,3 +3684,703 @@ Finished building target: SocketTry1
 make --no-print-directory post-build
 scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
  
+12:23:52 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/sockClient.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/sockClient.d" -MT"Source/sockClient.o" -o "Source/sockClient.o" "../Source/sockClient.cpp"
+Finished building: ../Source/sockClient.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:00:32 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:01:56 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:05:13 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:10:34 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:10:55 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:12:16 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:13:51 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/sockClient.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/sockClient.d" -MT"Source/sockClient.o" -o "Source/sockClient.o" "../Source/sockClient.cpp"
+Finished building: ../Source/sockClient.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+scp: /home/pi/socketV1//SocketTry1: Text file busy
+make[1]: [post-build] Error 1 (ignored)
+makefile:58: recipe for target 'post-build' failed
+ 
+19:14:03 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+make: Nothing to be done for 'all'.
+19:14:09 **** Clean-only build of configuration Debug for project SocketTry1 ****
+make clean 
+rm -rf  ./Source/SocketTry1.o ./Source/sockClient.o  ./Source/SocketTry1.d ./Source/sockClient.d  SocketTry1
+ 
+19:14:13 **** Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building file: ../Source/sockClient.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/sockClient.d" -MT"Source/sockClient.o" -o "Source/sockClient.o" "../Source/sockClient.cpp"
+Finished building: ../Source/sockClient.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:14:14 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+make: Nothing to be done for 'all'.
+19:17:45 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+../Source/SocketTry1.cpp:33:5: warning: first argument of 'int main(std::string, int)' should be 'int' [-Wmain]
+ int main(string IPAd, int portNr)
+     ^
+../Source/SocketTry1.cpp:33:5: warning: second argument of 'int main(std::string, int)' should be 'char **' [-Wmain]
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:18:36 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+../Source/SocketTry1.cpp:33:5: warning: first argument of 'int main(std::string, int)' should be 'int' [-Wmain]
+ int main(string IPAd, int portNr)
+     ^
+../Source/SocketTry1.cpp:33:5: warning: second argument of 'int main(std::string, int)' should be 'char **' [-Wmain]
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:21:52 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+../Source/SocketTry1.cpp: In function 'int main(int, char**)':
+../Source/SocketTry1.cpp:37:33: error: 'IPAd' was not declared in this scope
+  sockClient client = sockClient(IPAd, portNr);
+                                 ^
+../Source/SocketTry1.cpp:37:39: error: 'portNr' was not declared in this scope
+  sockClient client = sockClient(IPAd, portNr);
+                                       ^
+Source/subdir.mk:21: recipe for target 'Source/SocketTry1.o' failed
+make: *** [Source/SocketTry1.o] Error 1
+19:22:36 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+../Source/SocketTry1.cpp: In function 'int main(int, char**)':
+../Source/SocketTry1.cpp:38:48: error: invalid conversion from 'char*' to 'int' [-fpermissive]
+  sockClient client = sockClient(argv[2], argv[3]);
+                                                ^
+In file included from ../Source/SocketTry1.cpp:19:0:
+../Source/sockClient.h:39:2: note: initializing argument 2 of 'sockClient::sockClient(std::string, int)'
+  sockClient(string, int);
+  ^
+Source/subdir.mk:21: recipe for target 'Source/SocketTry1.o' failed
+make: *** [Source/SocketTry1.o] Error 1
+19:23:14 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:25:14 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:26:22 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:27:02 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:28:30 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:31:47 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:36:13 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:37:11 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:38:59 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/sockClient.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/sockClient.d" -MT"Source/sockClient.o" -o "Source/sockClient.o" "../Source/sockClient.cpp"
+Finished building: ../Source/sockClient.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:40:02 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:40:50 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:42:36 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:43:39 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+scp: /home/pi/socketV1//SocketTry1: Text file busy
+makefile:58: recipe for target 'post-build' failed
+make[1]: [post-build] Error 1 (ignored)
+ 
+19:43:51 **** Clean-only build of configuration Debug for project SocketTry1 ****
+make clean 
+rm -rf  ./Source/SocketTry1.o ./Source/sockClient.o  ./Source/SocketTry1.d ./Source/sockClient.d  SocketTry1
+ 
+19:43:53 **** Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building file: ../Source/sockClient.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/sockClient.d" -MT"Source/sockClient.o" -o "Source/sockClient.o" "../Source/sockClient.cpp"
+Finished building: ../Source/sockClient.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:46:18 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+In file included from ../Source/SocketTry1.cpp:19:0:
+../Source/sockClient.h: In function 'int main(int, char**)':
+../Source/sockClient.h:28:6: error: 'int sockClient::sock' is private
+  int sock; //socket
+      ^
+../Source/SocketTry1.cpp:52:12: error: within this context
+  if(client.sock > 0)
+            ^
+In file included from ../Source/SocketTry1.cpp:19:0:
+../Source/sockClient.h:28:6: error: 'int sockClient::sock' is private
+  int sock; //socket
+      ^
+../Source/SocketTry1.cpp:54:49: error: within this context
+Source/subdir.mk:21: recipe for target 'Source/SocketTry1.o' failed
+   cout << "Socket has been created: " << client.sock << endl;
+                                                 ^
+make: *** [Source/SocketTry1.o] Error 1
+19:47:21 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+../Source/SocketTry1.cpp: In function 'int main(int, char**)':
+../Source/SocketTry1.cpp:52:39: error: expected ')' before ';' token
+  if(int a = client.createSock(&client);)
+                                       ^
+Source/subdir.mk:21: recipe for target 'Source/SocketTry1.o' failed
+../Source/SocketTry1.cpp:52:9: warning: unused variable 'a' [-Wunused-variable]
+  if(int a = client.createSock(&client);)
+         ^
+../Source/SocketTry1.cpp:52:40: error: expected primary-expression before ')' token
+  if(int a = client.createSock(&client);)
+                                        ^
+make: *** [Source/SocketTry1.o] Error 1
+19:48:03 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building file: ../Source/sockClient.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/sockClient.d" -MT"Source/sockClient.o" -o "Source/sockClient.o" "../Source/sockClient.cpp"
+Finished building: ../Source/sockClient.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:49:25 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building file: ../Source/sockClient.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/sockClient.d" -MT"Source/sockClient.o" -o "Source/sockClient.o" "../Source/sockClient.cpp"
+Finished building: ../Source/sockClient.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:50:32 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building file: ../Source/sockClient.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/sockClient.d" -MT"Source/sockClient.o" -o "Source/sockClient.o" "../Source/sockClient.cpp"
+Finished building: ../Source/sockClient.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:51:49 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+../Source/SocketTry1.cpp: In function 'int main(int, char**)':
+../Source/SocketTry1.cpp:54:2: error: expected ';' before 'client'
+  client.setHint(&client);
+  ^
+make: *** [Source/SocketTry1.o] Error 1
+Source/subdir.mk:21: recipe for target 'Source/SocketTry1.o' failed
+19:52:00 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building file: ../Source/sockClient.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/sockClient.d" -MT"Source/sockClient.o" -o "Source/sockClient.o" "../Source/sockClient.cpp"
+Finished building: ../Source/sockClient.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+19:59:13 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+scp: /home/pi/socketV1//SocketTry1: Text file busy
+makefile:58: recipe for target 'post-build' failed
+make[1]: [post-build] Error 1 (ignored)
+ 
+19:59:26 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+make: Nothing to be done for 'all'.
+20:01:09 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+12:18:12 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+12:22:27 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+make: Nothing to be done for 'all'.
+12:22:34 **** Clean-only build of configuration Debug for project SocketTry1 ****
+make clean 
+rm -rf  ./Source/SocketTry1.o ./Source/sockClient.o  ./Source/SocketTry1.d ./Source/sockClient.d  SocketTry1
+ 
+12:22:37 **** Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building file: ../Source/sockClient.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/sockClient.d" -MT"Source/sockClient.o" -o "Source/sockClient.o" "../Source/sockClient.cpp"
+Finished building: ../Source/sockClient.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+scp: /home/pi/socketV1//SocketTry1: Text file busy
+make[1]: [post-build] Error 1 (ignored)
+makefile:58: recipe for target 'post-build' failed
+ 
+12:22:45 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+make: Nothing to be done for 'all'.
+12:22:50 **** Clean-only build of configuration Debug for project SocketTry1 ****
+make clean 
+rm -rf  ./Source/SocketTry1.o ./Source/sockClient.o  ./Source/SocketTry1.d ./Source/sockClient.d  SocketTry1
+ 
+12:22:52 **** Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building file: ../Source/sockClient.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/sockClient.d" -MT"Source/sockClient.o" -o "Source/sockClient.o" "../Source/sockClient.cpp"
+Finished building: ../Source/sockClient.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
+12:43:44 **** Incremental Build of configuration Debug for project SocketTry1 ****
+make all 
+Building file: ../Source/SocketTry1.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/SocketTry1.d" -MT"Source/SocketTry1.o" -o "Source/SocketTry1.o" "../Source/SocketTry1.cpp"
+Finished building: ../Source/SocketTry1.cpp
+ 
+Building file: ../Source/sockClient.cpp
+Invoking: Cross G++ Compiler
+arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Source/sockClient.d" -MT"Source/sockClient.o" -o "Source/sockClient.o" "../Source/sockClient.cpp"
+Finished building: ../Source/sockClient.cpp
+ 
+Building target: SocketTry1
+Invoking: Cross G++ Linker
+arm-linux-gnueabihf-g++  -o "SocketTry1"  ./Source/SocketTry1.o ./Source/sockClient.o   
+Finished building target: SocketTry1
+ 
+make --no-print-directory post-build
+scp SocketTry1 pi@192.168.2.90:/home/pi/socketV1/
+ 
