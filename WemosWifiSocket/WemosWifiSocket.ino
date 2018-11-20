@@ -78,9 +78,11 @@ void loop() {
           if (receivedData[0] >= 48 && receivedData[0] <= 57)//case van maken voor meerder opties. werkt wel met [0] maar niet met string
           {
             setIOOutput(receivedData[0] - 48); //ascii to dec/hex
+            client.print("OK");
           }
           else if (receivedData[0] >= 97 && receivedData[0] <= 102) {
             setIOOutput(receivedData[0] - 87); //ascii to hex
+            client.print("OK");
           }
         }
         else if (strcmp(receivedData, "switches") == 0) { //if string matches
