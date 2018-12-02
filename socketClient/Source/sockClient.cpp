@@ -15,6 +15,8 @@
 #include <string>
 #include "sockClient.h"
 
+#include <errno.h> //debug
+
 using namespace std;
 
 /*to do:
@@ -78,6 +80,7 @@ bool sockClient::connectToServer(sockaddr_in sa, sockClient* sc)
 	if (connection == -1)
 	{
 		cerr << " unable to connect" <<endl;
+		cerr << " cuz: " << strerror(errno) << endl;
 		return false;
 	}
 	else

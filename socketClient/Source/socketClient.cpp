@@ -12,8 +12,7 @@
 #include <sstream> //" cut"  strings
 #include "File.h"
 
-#define OUTPUTFILE "/home/pi/workingDir/output.txt"
-#define INUSEFILE "/home/pi/workingDir/inUse.txt"
+
 
 using namespace std;
 
@@ -32,8 +31,7 @@ int main(int argc, char** argv)
 const string outputPath = "/home/pi/workingDir/output.txt"; //move to class! (parameter)
 fstream *outputFile = new fstream; //move to class?
 File output = File(outputPath, outputFile);
-//create object
-sockClient client;
+sockClient client; //create object
 if(argc == 3) //if enough arguments are passed, use arguments to set ip and port
 {
 	client = sockClient((string)argv[1], atoi(argv[2]));
@@ -43,24 +41,23 @@ else //if not, use default ip and port
 	client = sockClient("192.168.3.228", 3333);
 }
 //create socket
-client.createSock(&client);
+client.createSock(&client); //todo create one for each device amd reove parameter (this.)
 client.setHint(&client); //set connection for data
-
+while(1){
 	string dataRead = output.readFile();
-	if(dataRead != "error"){
-		string wordsRead[10];
-		int index = 0;
-		stringstream ss(dataRead);
-		while (ss) {
+		if(dataRead != "error"){
+			string wordsRead[10];
+			int index = 0;
+			stringstream ss(dataRead);
+
+			while (ss) {
 			ss >> wordsRead[index++];
-		}
-		//possible commands
-		if (wordsRead[0] == "led") //add check for<16 (ascci)
+			}
+		//possible commands, add check for amount read? for looop?
+		if (wordsRead[0] == "led") //add check for<16 here or php?
 		{
 			//connect
 			client.connectToServer(client.server, &client);
-
-			cout << " tweede item is: " << wordsRead[1] << endl;
 
 			if (!client.sendToServer(wordsRead[1])) //send data. if unable to send, stop
 			{
@@ -68,55 +65,29 @@ client.setHint(&client); //set connection for data
 			}
 			if(client.receiveFromServer(&client) == "error") //wait for ack, if no ack give error
 			{
-					cerr << "Response timed out" << endl;
+					cerr << "Response timed out" << endl; //move to function?
 					return 19;
 			}
 			//close socket
-			client.closeSocket(&client);
+			//client.closeSocket(&client);
+			output.writeToFile("OK");
 
 		}
-		else {
-
+		else if (wordsRead[0] == "switches") {
+			client.connectToServer(client.server, &client);
+				if (!client.sendToServer(wordsRead[0])) //send data. if unable to send, stop
+				{
+						return 18;
+				}
+				sleep(1);//needed for determining whether or not the file changed (php)
+				output.writeToFile(client.receiveFromServer(&client));
+				//close socket
+				//client.closeSocket(&client);
 		}
 
 	}
 
-
-	//add check to see if inusefile is there, if so wait till its not.
-
-
-
-
-
-
-
-/*
-	while(1){
-		//send
-		cout << ">" ; //indicate send mode.
-		string data; //
-		getline(cin, data); //get data getline to prevent sending till return is pressed
-
-		if(data == "quit"){ //break from loop
-			break;
-		}
-		if (!client.sendToServer(data)) //send data. if unable to send, break.
-		{
-			break;
-		}
-
-		//receive /respond
-		if(client.receiveFromServer(&client) == "error")
-		{
-			cerr << "Response timed out" << endl;
-			continue;
-		}
-
-
-	}
-	*/
-
-
+}
 	return 0;
 }
 

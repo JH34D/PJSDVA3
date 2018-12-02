@@ -47,8 +47,6 @@ void File::writeToFile(string data){
 
 
 	this->currentFile->open(this->path, fstream::out | fstream::trunc);
-
-
 	if(this->currentFile->is_open()){
 		*currentFile << data;
 	}

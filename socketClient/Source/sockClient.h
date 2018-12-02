@@ -28,7 +28,7 @@ private:
 public: //sockclient pointer? parameter or this.?
 
 
-	sockaddr_in server; //hint for server
+	sockaddr_in server; //hint for server //todo move to private
 
 
 	sockClient();
