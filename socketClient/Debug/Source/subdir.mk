@@ -4,16 +4,19 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../Source/Chair.cpp \
 ../Source/File.cpp \
 ../Source/sockClient.cpp \
 ../Source/socketClient.cpp 
 
 OBJS += \
+./Source/Chair.o \
 ./Source/File.o \
 ./Source/sockClient.o \
 ./Source/socketClient.o 
 
 CPP_DEPS += \
+./Source/Chair.d \
 ./Source/File.d \
 ./Source/sockClient.d \
 ./Source/socketClient.d 
@@ -23,7 +26,7 @@ CPP_DEPS += \
 Source/%.o: ../Source/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross G++ Compiler'
-	arm-linux-gnueabihf-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
+	arm-linux-gnueabihf-g++ -std=c++0x -I/home/programmer/jsonLib -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

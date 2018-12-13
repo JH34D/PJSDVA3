@@ -48,39 +48,40 @@ sockClient::sockClient(string addr, int prt)
 }
 
 //create socket
-int sockClient::createSock(sockClient* sc)
+int sockClient::createSock()
 {
 
-	if (sc->sock == -1) //Socket not yet created or failed to create on last try.
+	if (sock == -1) //Socket not yet created or failed to create on last try.
 	{
-		sc->sock = socket(AF_INET, SOCK_STREAM, 0); //create socket(ipv4, tcp, protocol auto)
+		sock = socket(AF_INET, SOCK_STREAM, 0); //create socket(ipv4, tcp, protocol auto)
 	}
-	if (sc->sock == -1) //Failed to create socket
+	if (sock == -1) //Failed to create socket
 	{
 		cerr << "Failed to create socket" << endl;
 		return -1;
 	}
-	return sc->sock;
+	return sock;
 }
 
 //create hint structure for the server we want to connect with./////////
-void sockClient::setHint(sockClient* sc)
+void sockClient::setHint()
 {
-	sc->server.sin_family = AF_INET; //ipv4
-	sc->server.sin_port = htons(sc->port); //string to network short (small endian?)
-	inet_pton(AF_INET, sc->address.c_str(), &sc->server.sin_addr); //convert to sin addr
+	server.sin_family = AF_INET; //ipv4
+	server.sin_port = htons(port); //string to network short (small endian?)
+	inet_pton(AF_INET, address.c_str(), &server.sin_addr); //convert to sin addr
 }
 
 
-bool sockClient::connectToServer(sockaddr_in sa, sockClient* sc)
+bool sockClient::connectToServer()
 {
 	//connect to hint
+	setHint();
 
-	int connection = connect(sc->sock, (sockaddr*)&sa, sizeof(sa));
+	int connection = connect(sock, (sockaddr*) &server, sizeof(server));
 	if (connection == -1)
 	{
 		cerr << " unable to connect" <<endl;
-		cerr << " cuz: " << strerror(errno) << endl;
+		cerr << " because: " << strerror(errno) << endl;
 		return false;
 	}
 	else
@@ -106,19 +107,19 @@ bool sockClient::sendToServer(string data) //send
 
 }
 
-string sockClient::receiveFromServer(sockClient* sc) //receive
+string sockClient::receiveFromServer() //receive
 {
 
 	struct timeval tv; //timeout settings for receive timeout
 		tv.tv_sec = 3; //seconds
 		tv.tv_usec = 0; //mircoseconds
 
-	setsockopt(sc->sock, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv));
+	setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv));
 
 
 	char buffer[4096]; //buffer for received data
 	memset(buffer, 0, 4096); // clear buffer (flush with 0)
-	int dataReceived = recv(sc->sock, buffer, 4096, 0); //socket, store in buffer, size, flag.
+	int dataReceived = recv(sock, buffer, 4096, 0); //socket, store in buffer, size, flag.
 	if(dataReceived == -1){ //if there is no data
 		cerr << "There was an error while getting the data from the server" << endl;
 		return "error"; //is there a better way?
@@ -131,12 +132,12 @@ string sockClient::receiveFromServer(sockClient* sc) //receive
 	return buffer;
 }
 
-void sockClient::closeSocket(sockClient* sc){
-	if(sc->sock == -1){ //check if socket exists
+void sockClient::closeSocket(){
+	if(sock == -1){ //check if socket exists
 		cerr << "Socket has already been closed" << endl;
 	}
 	else{ //close socket
-		close(sc->sock);
+		close(sock);
 	}
 }
 

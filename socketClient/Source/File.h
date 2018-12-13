@@ -6,6 +6,7 @@
  */
 #include <iostream>
 #include <fstream>
+#include "json.hpp"
 
 using namespace std;
 
@@ -15,13 +16,13 @@ using namespace std;
 class File {
 public:
 	//File();
-	File(string, fstream*);
+	File(const char*);
 	virtual ~File();
 
 	//void openFile();
 
 	string readFile();
-	void writeToFile(string);
+	void writeToFile(nlohmann::json);
 	//setInUse(bool);
 
 

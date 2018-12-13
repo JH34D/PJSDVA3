@@ -6,31 +6,22 @@
 #include <arpa/inet.h> //socket
 #include <string.h> //strings (legacy, needed for sockets)
 #include <string> //strings
-#include "sockClient.h" // class with socket functions
 #include <stdlib.h> //atoi
 #include <fstream> //read write files
 #include <sstream> //" cut"  strings
-#include "File.h"
+#include "json.hpp" //json
 
+#include "File.h" //class for filehandling
+#include "Chair.h"	//class for device chair
+#include "sockClient.h" // class with socket functions
 
 
 using namespace std;
-
-/*to do:
- * create object
- * Create socket
- * create hint for server we re connecting to
- * connect to socket
- * read
- * write
- * close/destroy
- */
+using namespace nlohmann;
 
 int main(int argc, char** argv)
 {
-const string outputPath = "/home/pi/workingDir/output.txt"; //move to class! (parameter)
-fstream *outputFile = new fstream; //move to class?
-File output = File(outputPath, outputFile);
+
 sockClient client; //create object
 if(argc == 3) //if enough arguments are passed, use arguments to set ip and port
 {
@@ -40,9 +31,19 @@ else //if not, use default ip and port
 {
 	client = sockClient("192.168.3.228", 3333);
 }
-//create socket
-client.createSock(&client); //todo create one for each device amd reove parameter (this.)
-client.setHint(&client); //set connection for data
+const char* ip = "192.168.3.228";
+const char* path = "/home/pi/workingDir/output.json";
+Chair chair1 = Chair(ip, 3333, path);
+chair1.handleGui();
+//chair1.handleWemos();
+cin.get();
+return 0;
+}
+
+
+
+
+/*
 while(1){
 	string dataRead = output.readFile();
 		if(dataRead != "error"){
@@ -85,9 +86,9 @@ while(1){
 				//client.closeSocket(&client);
 		}
 
+
 	}
 
-}
-	return 0;
-}
+}*/
+
 

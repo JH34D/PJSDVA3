@@ -8,13 +8,14 @@
 #include <fstream>
 #include "File.h"
 #include <iostream>
+#include "json.hpp"
 
 using namespace std;
 
 
-File::File(string pth, fstream* fsa) {
-	this->path = pth.c_str(); //string to char*
-	this->currentFile = fsa;
+File::File(const char* pth) {
+	this->path = pth;
+	currentFile = new fstream;
 
 }
 
@@ -25,12 +26,12 @@ File::~File() {
 string File::readFile(){
 
 
-	//this->currentFile->open(this->path, fstream::in);
+
 	currentFile->open(path, std::fstream::in);
-	if(this->currentFile->is_open()){
+	if(currentFile->is_open()){
 		string data;
 		std::getline((*currentFile), data);
-		this->closeFile();
+		closeFile();
 		return data;
 	}
 	else{
@@ -43,12 +44,13 @@ void File::closeFile(){
 	this->currentFile->close();
 }
 
-void File::writeToFile(string data){
-
+void File::writeToFile(nlohmann::json jp){//string data){
 
 	this->currentFile->open(this->path, fstream::out | fstream::trunc);
 	if(this->currentFile->is_open()){
-		*currentFile << data;
+
+		*currentFile <<  jp;//data;
+
 	}
 	else{
 		cerr << "unable to open file for writing. " << this->path << endl;
