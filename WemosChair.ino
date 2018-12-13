@@ -20,10 +20,11 @@
 //Wifi gegevens
 char ssid[] = "Korsakov";
 char pass[] = "P@ssw0rd";
+
 WiFiServer wifiServerWemos(3333); //create object of wifiserver which will listen on the specified port
 char receivedData[4096]; //create array to store received data
 uint16_t rdIndex = 0; //index for receivedData array
-
+bool bedtimeFlag = false;
 
 void setup() {
   // put your setup code here, to run once:
@@ -47,34 +48,34 @@ void setup() {
   wifiServerWemos.begin();
 
   receivedData[0] = '\0';
-  setIOOutput(1);
+  setIOOutput(0); //start with all outputs 0
 }
 
 void loop() {
-/*
- * Chair     
-      
-I/O Description Mfr. No:  Mfr.
-DI 0  Push Button   
-DI 1      
-DI 2      
-DI 3      
-DO 4  LED   
-DO 5  Vibration Motor   
-DO 6      
-DO 7      
-AI 0  Force Sensor  SEN-09375 Sparkfun
-AI 1      
+  /*
+     Chair
+
+    I/O Description Mfr. No:  Mfr.
+    DI 0  Push Button
+    DI 1
+    DI 2
+    DI 3
+    DO 4  LED
+    DO 5  Vibration Motor
+    DO 6
+    DO 7
+    AI 0  Force Sensor  SEN-09375 Sparkfun
+    AI 1
 
 
-functionele werking stoel:
-trillen (bijv na 10 uur. aansturing via Pi)
-lezen druksensor (melding als in stoel)
+    functionele werking stoel:
+    trillen (bijv na 10 uur. aansturing via Pi)
+    lezen druksensor (melding als in stoel)
 
 
 
 
- */
+  */
 
   //client handling
   WiFiClient client = wifiServerWemos.available();
@@ -87,18 +88,32 @@ lezen druksensor (melding als in stoel)
     Serial.print(clientIP);
     Serial.print(" on port ");
     Serial.println(clientPort);
- 
+
     while (client.connected()) { //while client connected (might have to be moved to an interrupt)
 
-      if (receivedData[0] != '\0') {
+      if (receivedData[0] != '\0') { //data has been placed in array
         receivedData[rdIndex] = '\0'; //Add terminate string indicator
-        if (strcmp(receivedData, "tril") == 0) { //if string matches
-          setIOOutput(2);
-          client.print("OK");
+        Serial.println();
+        if (strcmp(receivedData, "hi") == 0) { //if string matches
+          client.print("hi");
+        }
+        else if (strcmp(receivedData, "bedtime") == 0) {
+          bedtimeFlag = true;
+          Serial.println("evening");
+          client.print("ok");
+          if (readAdc() >= 700) { //als druk hoger dan 699
+            setIOOutput(2); //buzzer aan
+          }
+        }
+        else if (strcmp(receivedData, "noBedtime") == 0) {
+          bedtimeFlag = false;
+          Serial.println("morning");
+          client.print("ok");
+          setIOOutput(0);
         }
         rdIndex = 0; //reset index
         receivedData[0] = '\0'; //set start of string as end of string
-}
+      }
       while (client.available() > 0) { //while data from client availabel
 
         char c = client.read();
@@ -108,25 +123,25 @@ lezen druksensor (melding als in stoel)
       }
 
       delay(10); //small delay between data
-    
+
     }
-    
+
     //passed the while loop which means the client disconnected
     client.stop();
     Serial.println("Client disconnected");
- 
+
   }
-          if (readIO() == 15){//als button
-          setIOOutput(3); //lampje en buzzer aan
-         }         
-         else if (readAdc() >= 700){ //als druk hoger dan 699
-          setIOOutput(2); //buzzer aan
-         }
-         else{
-          setIOOutput(0); //niets aan
-         }
- 
-          
+  if (readIO() == 15) { //als button
+    setIOOutput(3); //lampje en buzzer aan
+  }
+  else if (readAdc() >= 700) { //als druk hoger dan 699
+    setIOOutput(2); //buzzer aan
+  }
+  else {
+    setIOOutput(0); //niets aan
+  }
+
+
 }
 
 
@@ -153,25 +168,25 @@ unsigned int readIO() {
   Wire.endTransmission();
   Wire.requestFrom(0x38, 1);
   unsigned int input = Wire.read();
- // Serial.print("Digital in: ");
+  // Serial.print("Digital in: ");
   //Serial.println(input & 0x0F);
   return input & 0x0F;
 }
 
-unsigned int readAdc(){
-  Wire.requestFrom(0x36, 4);   
-  unsigned int anin0 = Wire.read()&0x03;  
-  anin0=anin0<<8;
-  anin0 = anin0|Wire.read();  
-  unsigned int anin1 = Wire.read()&0x03;  
-  anin1=anin1<<8;
-  anin1 = anin1|Wire.read(); 
+unsigned int readAdc() {
+  Wire.requestFrom(0x36, 4);
+  unsigned int anin0 = Wire.read() & 0x03;
+  anin0 = anin0 << 8;
+  anin0 = anin0 | Wire.read();
+  unsigned int anin1 = Wire.read() & 0x03;
+  anin1 = anin1 << 8;
+  anin1 = anin1 | Wire.read();
   /*
-  Serial.print("analog in 0: ");
-  Serial.println(anin0);   
-  Serial.print("analog in 1: ");
-  Serial.println(anin1);   
-  Serial.println("");
+    Serial.print("analog in 0: ");
+    Serial.println(anin0);
+    Serial.print("analog in 1: ");
+    Serial.println(anin1);
+    Serial.println("");
   */
   return anin0;
 }
