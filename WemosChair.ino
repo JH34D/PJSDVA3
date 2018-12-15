@@ -1,3 +1,5 @@
+
+
 #include <ESP8266WiFi.h> //libs for wifi
 #include <ESP8266WiFiAP.h>
 #include <ESP8266WiFiGeneric.h>
@@ -10,6 +12,7 @@
 #include <WiFiServer.h>
 #include <WiFiUdp.h>
 #include <Wire.h> //lib for i2c
+#include <ArduinoJson.h> //json https://github.com/bblanchon/ArduinoJson, installed using the arduino library manager.
 
 //bronnen: Voorbeeldcode BB, https://techtutorialsx.com/2018/06/02/esp8266-arduino-socket-server/
 
@@ -24,13 +27,19 @@ char pass[] = "P@ssw0rd";
 WiFiServer wifiServerWemos(3333); //create object of wifiserver which will listen on the specified port
 char receivedData[4096]; //create array to store received data
 uint16_t rdIndex = 0; //index for receivedData array
-bool bedtimeFlag = false;
+char sensors[] = "{\"sittingDown\":0}";
+char actions[] = "{\"vibrate\":0}";
 
 void setup() {
   // put your setup code here, to run once:
   Wire.begin();
   Serial.begin(115200);
   setIOConfig(15); //select I/O mode
+  //set static ip outside dhcp scope
+  IPAddress ip(192, 168, 3, 10);
+  IPAddress gateway(192, 168, 3, 90);
+  IPAddress subnet(255, 255, 255, 0);
+  WiFi.config(ip, gateway, subnet);
   // Connect to Wi-Fi network
   WiFi.mode(WIFI_STA); //set client mode
   WiFi.begin(ssid, pass); //begin connection (ssid and password)
@@ -49,6 +58,7 @@ void setup() {
 
   receivedData[0] = '\0';
   setIOOutput(0); //start with all outputs 0
+
 }
 
 void loop() {
@@ -71,17 +81,14 @@ void loop() {
     functionele werking stoel:
     trillen (bijv na 10 uur. aansturing via Pi)
     lezen druksensor (melding als in stoel)
-
-
-
-
   */
 
+
   //client handling
-  WiFiClient client = wifiServerWemos.available();
+  WiFiClient client = wifiServerWemos.available(); //check for and accept connections
 
-  if (client) { //if client exists
-
+  if (client) { //if connection has been acceted
+    //print data of connected client
     IPAddress clientIP = client.remoteIP(); //store client IP
     uint16_t clientPort = client.localPort();
     Serial.print("Client connected with ip ");
@@ -89,62 +96,58 @@ void loop() {
     Serial.print(" on port ");
     Serial.println(clientPort);
 
-    while (client.connected()) { //while client connected (might have to be moved to an interrupt)
+    while (client.connected()) { //while client connected
 
-      if (receivedData[0] != '\0') { //data has been placed in array
-        receivedData[rdIndex] = '\0'; //Add terminate string indicator
-        Serial.println();
-        if (strcmp(receivedData, "hi") == 0) { //if string matches
-          client.print("hi");
+      if (receivedData[0] != '\0') { //data has been placed in array because the first char isnt the end of the string
+        receivedData[rdIndex] = '\0'; //Add terminate string indicator at end of chars
+        Serial.println(receivedData);
+
+        if (receivedData[0] == 'i') { //indicates request for input
+
+          StaticJsonBuffer<200> jsonBuffer2;
+          JsonObject& sensorsJson = jsonBuffer2.createObject();
+          if (readAdc() > 700) {
+            sensorsJson.set("sits", 1);
+          }
+          else {
+            sensorsJson.set("sits", 0);
+          }
+          String response;
+          sensorsJson.printTo(response);
+          client.print(response);
         }
-        else if (strcmp(receivedData, "bedtime") == 0) {
-          bedtimeFlag = true;
-          Serial.println("evening");
-          client.print("ok");
-          if (readAdc() >= 700) { //als druk hoger dan 699
-            setIOOutput(2); //buzzer aan
+        else if (receivedData[0] == 'o') { //indicates request for output
+          char* request = receivedData + 2; //stip request indicator and space
+          Serial.println("request is: " + (String) request);
+          StaticJsonBuffer<200> jsonBuffer1;
+          JsonObject& outputsJson = jsonBuffer1.parseObject(request);
+          bool vibrate = outputsJson["vibrate"]; //variable = value of key chair in json
+          if (vibrate) {
+            setIOOutput(2);
+          }
+          else {
+            setIOOutput(0);
           }
         }
-        else if (strcmp(receivedData, "noBedtime") == 0) {
-          bedtimeFlag = false;
-          Serial.println("morning");
-          client.print("ok");
-          setIOOutput(0);
-        }
+
         rdIndex = 0; //reset index
         receivedData[0] = '\0'; //set start of string as end of string
       }
       while (client.available() > 0) { //while data from client availabel
 
-        char c = client.read();
-        Serial.write(c); //write data to console
-        receivedData[rdIndex++] = c;
+        char c = client.read(); //read char
+        receivedData[rdIndex++] = c; //add char to "string"
 
       }
-
       delay(10); //small delay between data
-
     }
-
     //passed the while loop which means the client disconnected
     client.stop();
     Serial.println("Client disconnected");
 
   }
-  if (readIO() == 15) { //als button
-    setIOOutput(3); //lampje en buzzer aan
-  }
-  else if (readAdc() >= 700) { //als druk hoger dan 699
-    setIOOutput(2); //buzzer aan
-  }
-  else {
-    setIOOutput(0); //niets aan
-  }
-
 
 }
-
-
 
 void setIOConfig(unsigned int input) { //add adress as parameter. define address
   Wire.beginTransmission(0x38);
@@ -158,8 +161,6 @@ void setIOOutput(unsigned int value) {
   Wire.write(byte(0x01));
   Wire.write(byte(value << 4));
   Wire.endTransmission();
-  //Serial.print("Digital out: ");
-  //Serial.println(value);
 }
 
 unsigned int readIO() {
@@ -168,8 +169,6 @@ unsigned int readIO() {
   Wire.endTransmission();
   Wire.requestFrom(0x38, 1);
   unsigned int input = Wire.read();
-  // Serial.print("Digital in: ");
-  //Serial.println(input & 0x0F);
   return input & 0x0F;
 }
 
@@ -181,13 +180,10 @@ unsigned int readAdc() {
   unsigned int anin1 = Wire.read() & 0x03;
   anin1 = anin1 << 8;
   anin1 = anin1 | Wire.read();
-  /*
-    Serial.print("analog in 0: ");
-    Serial.println(anin0);
-    Serial.print("analog in 1: ");
-    Serial.println(anin1);
-    Serial.println("");
-  */
+
   return anin0;
 }
+
+
+
 
