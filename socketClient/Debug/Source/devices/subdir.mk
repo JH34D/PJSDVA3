@@ -4,26 +4,20 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../Source/Device.cpp \
-../Source/File.cpp \
-../Source/sockClient.cpp \
-../Source/socketClient.cpp 
+../Source/devices/Chair.cpp \
+../Source/devices/Column.cpp 
 
 OBJS += \
-./Source/Device.o \
-./Source/File.o \
-./Source/sockClient.o \
-./Source/socketClient.o 
+./Source/devices/Chair.o \
+./Source/devices/Column.o 
 
 CPP_DEPS += \
-./Source/Device.d \
-./Source/File.d \
-./Source/sockClient.d \
-./Source/socketClient.d 
+./Source/devices/Chair.d \
+./Source/devices/Column.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
-Source/%.o: ../Source/%.cpp
+Source/devices/%.o: ../Source/devices/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross G++ Compiler'
 	arm-linux-gnueabihf-g++ -std=c++0x -I/home/programmer/jsonLib -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
