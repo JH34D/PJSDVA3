@@ -10,7 +10,7 @@
 
 #include "../Device.h"
 
-class Column : public Device {
+class Column {
 public:
 	Column();
 	virtual ~Column();
