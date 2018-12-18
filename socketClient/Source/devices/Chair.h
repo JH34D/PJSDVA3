@@ -15,7 +15,7 @@
 
 
 
-class Chair : public Device { //might create "motherclass" with common attributes like file, socket etc.
+class Chair : public Device {
 
 public:
 	Chair(string ip, int port, const char* path);
@@ -23,8 +23,12 @@ public:
 	void handleActions();
 private:
 	void handleBedtime();
-	bool handleAggression();
-//located = hanks room?
+	void handleAggression();
+	bool aggressionTracker[10];
+	time_t lastMeasurement;
+	int trackerIndex;
+	double getTimePastInSeconds();
+	//located = hanks room?
 //date bought?
 	//Aggression
 

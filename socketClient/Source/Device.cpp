@@ -25,7 +25,7 @@ void Device::initConnection(){
 void Device::requestInputs(){
 	wemosCom.sendToServer("i");
 	inputs = nlohmann::json::parse(wemosCom.receiveFromServer());
-	cout << "inputs received: " << inputs.dump(1) << endl;
+	//cout << "inputs received: " << inputs.dump(1) << endl;
 }
 void Device::setOutputs(){
 	static nlohmann::json outputsOld;

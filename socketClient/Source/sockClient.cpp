@@ -123,12 +123,12 @@ string sockClient::receiveFromServer() //receive
 	if(dataReceived == -1){ //if there is no data
 		cerr << "There was an error while getting the data from the server" << endl;
 		return "error"; //is there a better way?
-	}
+	}/*
 	else //print received data
 	{
 		cout << "Server> " << string(buffer, dataReceived) << endl;
 	}
-
+*/
 	return buffer;
 }
 

@@ -9,7 +9,7 @@
 #include <stdlib.h> //atoi
 #include <fstream> //read write files
 #include <sstream> //" cut"  strings
-#include "json.hpp" //json
+#include "json.hpp" //json https://github.com/nlohmann/json/tree/develop/single_include/nlohmann
 
 #include "File.h" //class for filehandling
 #include "devices/Chair.h"	//class for device chair

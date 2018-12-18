@@ -8,7 +8,9 @@
 #ifndef DEVICES_COLUMN_H_
 #define DEVICES_COLUMN_H_
 
-class Column {
+#include "../Device.h"
+
+class Column : public Device {
 public:
 	Column();
 	virtual ~Column();
