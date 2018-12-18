@@ -18,16 +18,16 @@ class Device {
 public:
 	Device(string ip, int port, const char* path);
 	virtual ~Device();
-	void requestInputs();
-	void setOutputs();
+	void requestInputs(); //gets input data from connected device
+	void setOutputs(); //sends data to connected device
 	//TODO add function for php
-	void tempPHPHandle();
+	void tempPHPHandler();
 protected:
 	File phpCom; //used for communication with php on the interface
 	sockClient wemosCom; //used for communication with c on the WeMos
-	nlohmann::json inputs;
-	nlohmann::json outputs;
-	nlohmann::json phpRw;
+	nlohmann::json inputs; //used to store input data.
+	nlohmann::json outputs; //used to store data to set output
+	nlohmann::json phpRw; //used to store data from and for the php interface
 private:
 	void initConnection();
 };

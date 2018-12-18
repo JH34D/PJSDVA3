@@ -22,15 +22,6 @@ using namespace nlohmann;
 int main(int argc, char** argv)
 {
 
-sockClient client; //create object
-if(argc == 3) //if enough arguments are passed, use arguments to set ip and port
-{
-	client = sockClient((string)argv[1], atoi(argv[2]));
-}
-else //if not, use default ip and port
-{
-	client = sockClient("192.168.3.10", 3333);
-}
 const char* ip = "192.168.3.10";
 const char* path = "/home/pi/workingDir/output.json";
 Chair chair1 = Chair(ip, 3333, path);
