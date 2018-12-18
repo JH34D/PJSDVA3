@@ -12,7 +12,7 @@
 using namespace std;
 using namespace nlohmann;
 
-Chair::Chair(string ip, int port,const char* path):Device(ip,port,path),lastMeasurement(time(0)),trackerIndex(0){//:phpCom(path),wemosCom(ip, port){
+Chair::Chair(string ip, int port):Device(ip,port),lastMeasurement(time(0)),trackerIndex(0){//:phpCom(path),wemosCom(ip, port){
 
 }
 
@@ -47,7 +47,7 @@ void Chair::handleBedtime(){
 	struct tm* currentTime;
 	currentTime = localtime(&rawTime);
 	//currentTime->tm_hour = 22; //testing.
-	if (sits && (currentTime->tm_hour > 21 || currentTime->tm_hour < 7)){ //TODO optionally add flag to only send output once
+	if (sits && (currentTime->tm_hour > 21 || currentTime->tm_hour < 7)){
 		outputs["vibrate"] = 1;
 	}
 	else {
@@ -57,29 +57,38 @@ void Chair::handleBedtime(){
 }
 
 void Chair::handleAggression(){ //checks how many times user was seated during a 10 seconds timeframe.
-	if(getTimePastInSeconds() >= 1.0){
-		cout << trackerIndex << endl;
-		if (trackerIndex == 10){
-			trackerIndex = 0;
-			int sum = 0;
-			for (int i = 0; i>= 9; i++){
-				sum += aggressionTracker[i];
+	phpCom->updateDataRead();
+	if(phpCom->phpDataJson.value("aggressive", 8) == 0){
+
+		if(getTimePastInSeconds() >= 1.0){
+			if (trackerIndex == 10){
+				trackerIndex = 0;
+				int sum = 0;
+				for (int i = 0; i>= 9; i++){
+					sum += aggressionTracker[i];
+				}
+				if(sum <= 8 && sum > 2){ //if user stood up twice or sat down more than twice during the last 10 seconds, make chair vibrate
+					outputs["vibrate"] = 1;
+					phpCom->phpDataJson["aggressive"] = 1;
+					phpCom->writeToFile();
+				}
+				else {
+					outputs["vibrate"] = 1;
+				}
 			}
-			if(sum < 8 && sum > 2){
-				outputs["vibrate"] = 1;
+			else{
+				//move to function?
+				int sits = inputs.value("sits", 8); //get value if error return 8
+						if (sits == 8){ //check for error
+							cerr << "Error while reading input values. Sits could not be found in Json object in function handleAggression() in class chair" << endl;
+							sits = 0;
+							return;
+						}
+				aggressionTracker[trackerIndex++] = sits;
 			}
+			lastMeasurement = time(0);
+
 		}
-		else{
-			//move to function?
-			int sits = inputs.value("sits", 8); //get value if error return 8
-					if (sits == 8){ //check for error
-						cerr << "Error while reading input values. Sits could not be found in Json object in function handleAggression() in class chair" << endl;
-						sits = 0;
-						return;
-					}
-			aggressionTracker[trackerIndex++] = sits;
-		}
-		lastMeasurement = time(0);
 
 	}
 }

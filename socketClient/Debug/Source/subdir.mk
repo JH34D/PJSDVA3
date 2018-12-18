@@ -6,18 +6,21 @@
 CPP_SRCS += \
 ../Source/Device.cpp \
 ../Source/File.cpp \
+../Source/Php.cpp \
 ../Source/sockClient.cpp \
 ../Source/socketClient.cpp 
 
 OBJS += \
 ./Source/Device.o \
 ./Source/File.o \
+./Source/Php.o \
 ./Source/sockClient.o \
 ./Source/socketClient.o 
 
 CPP_DEPS += \
 ./Source/Device.d \
 ./Source/File.d \
+./Source/Php.d \
 ./Source/sockClient.d \
 ./Source/socketClient.d 
 

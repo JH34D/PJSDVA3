@@ -23,9 +23,9 @@ int main(int argc, char** argv)
 {
 
 const char* ip = "192.168.3.10";
-const char* path = "/home/pi/workingDir/output.json";
-Chair chair1 = Chair(ip, 3333, path);
+const char* path = "/home/pi/workingDir/output.json"; //requires local file and permission for this file. (chmod 777 filename.json);
 
+Chair chair1 = Chair(ip, 3333); // create object of type chair
 while(1){
 chair1.handleActions();
 

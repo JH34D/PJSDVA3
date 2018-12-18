@@ -13,21 +13,21 @@
 #include "File.h"
 #include "sockClient.h"
 #include "json.hpp"
+#include  "Php.h"
 
 class Device {
 public:
-	Device(string ip, int port, const char* path);
+	Device(string ip, int port);
 	virtual ~Device();
 	void requestInputs(); //gets input data from connected device
 	void setOutputs(); //sends data to connected device
 	//TODO add function for php
-	void tempPHPHandler();
 protected:
-	File phpCom; //used for communication with php on the interface
 	sockClient wemosCom; //used for communication with c on the WeMos
 	nlohmann::json inputs; //used to store input data.
 	nlohmann::json outputs; //used to store data to set output
-	nlohmann::json phpRw; //used to store data from and for the php interface
+	static Php *phpCom;
+	//TODO add static Json/array for crosstalk between devices. e.g. Turn off lights when in bed after x time or open door if fire has been detected.
 private:
 	void initConnection();
 };

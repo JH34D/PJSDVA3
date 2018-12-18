@@ -18,9 +18,10 @@
 class Chair : public Device {
 
 public:
-	Chair(string ip, int port, const char* path);
+	Chair(string ip, int port);
 	virtual ~Chair();
 	void handleActions();
+	void temp();
 private:
 	void handleBedtime();
 	void handleAggression();

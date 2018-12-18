@@ -44,12 +44,12 @@ void File::closeFile(){
 	this->currentFile->close();
 }
 
-void File::writeToFile(nlohmann::json jp){//string data){
+void File::writeToFile(nlohmann::json jp){
 
 	this->currentFile->open(this->path, fstream::out | fstream::trunc);
 	if(this->currentFile->is_open()){
 
-		*currentFile <<  jp;//data;
+		*currentFile <<  jp;
 
 	}
 	else{

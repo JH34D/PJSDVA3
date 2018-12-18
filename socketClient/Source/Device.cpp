@@ -7,19 +7,20 @@
 
 #include "Device.h"
 
-Device::Device(string ip, int port, const char* path):phpCom(path),wemosCom(ip, port) {
+Device::Device(string ip, int port):wemosCom(ip, port) {
 
 	initConnection();
+
 
 }
 
 Device::~Device() {
 	// TODO Auto-generated destructor stub
 }
-
+Php* Device::phpCom = new Php;
 
 void Device::initConnection(){
-	wemosCom.createSock(); //add to init method in socket class?
+	wemosCom.createSock();
 	wemosCom.connectToServer();
 }
 void Device::requestInputs(){
@@ -28,6 +29,7 @@ void Device::requestInputs(){
 	//cout << "inputs received: " << inputs.dump(1) << endl;
 }
 void Device::setOutputs(){
+	//check if outputs has changed. if so send data.
 	static nlohmann::json outputsOld;
 	if(outputsOld == outputs){
 		return;
@@ -37,6 +39,9 @@ void Device::setOutputs(){
 		outputsOld = outputs;
 	}
 }
-void Device::tempPHPHandle(){
+/*
+void Device::tempPHPHandler(){
 	//phpRw = nlohmann::json::parse(phpCom.readFile());
 }
+*/
+
