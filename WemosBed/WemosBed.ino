@@ -37,7 +37,7 @@ void setup() {
   setIOConfig(15); //select I/O mode
   setIOOutput(0); //start with all outputs 0
   //set static ip outside dhcp scope
-  IPAddress ip(192, 168, 3, 10);
+  IPAddress ip(192, 168, 3, 11);
   IPAddress gateway(192, 168, 3, 90);
   IPAddress subnet(255, 255, 255, 0);
   WiFi.config(ip, gateway, subnet);
@@ -58,32 +58,11 @@ void setup() {
   wifiServerWemos.begin();
 
   receivedData[0] = '\0';
-  
+
 
 }
 
 void loop() {
-  /*
-     Chair
-
-    I/O Description Mfr. No:  Mfr.
-    DI 0  Push Button
-    DI 1
-    DI 2
-    DI 3
-    DO 4  LED
-    DO 5  Vibration Motor
-    DO 6
-    DO 7
-    AI 0  Force Sensor  SEN-09375 Sparkfun
-    AI 1
-
-
-    functionele werking stoel:
-    trillen (bijv na 10 uur. aansturing via Pi)
-    lezen druksensor (melding als in stoel)
-  */
-
 
   //client handling
   WiFiClient client = wifiServerWemos.available(); //check for and accept connections
@@ -101,18 +80,11 @@ void loop() {
 
       if (receivedData[0] != '\0') { //data has been placed in array because the first char isnt the end of the string
         receivedData[rdIndex] = '\0'; //Add terminate string indicator at end of chars
-        
-
         if (receivedData[0] == 'i') { //indicates request for input
-
           StaticJsonBuffer<200> jsonBuffer2;
           JsonObject& sensorsJson = jsonBuffer2.createObject();
-          if (readAdc() > 700) {
-            sensorsJson.set("sits", 1);
-          }
-          else {
-            sensorsJson.set("sits", 0);
-          }
+          //if adc
+          sensorsJson.set("lays", 1);
           String response;
           sensorsJson.printTo(response);
           client.print(response);
@@ -128,7 +100,7 @@ void loop() {
           }
           else {
             setIOOutput(0);
-            
+
           }
         }
 
