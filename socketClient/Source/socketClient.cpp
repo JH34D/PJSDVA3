@@ -8,28 +8,36 @@
 #include <string> //strings
 #include <stdlib.h> //atoi
 #include <fstream> //read write files
-#include <sstream> //" cut"  strings
+//#include <sstream> //" cut"  strings
 #include "json.hpp" //json https://github.com/nlohmann/json/tree/develop/single_include/nlohmann
 
 #include "File.h" //class for filehandling
-#include "devices/Chair.h"	//class for device chair
 #include "sockClient.h" // class with socket functions
-
+#include "devices/Chair.h"
+#include "devices/Bed.h"
 
 using namespace std;
 using namespace nlohmann;
+
+/*
+ * TODO general:
+ * -add const keyword to function where no attributes are changed.
+ * -
+ */
+
 
 int main(int argc, char** argv)
 {
 
 const char* ip = "192.168.3.10";
-const char* path = "/home/pi/workingDir/output.json"; //requires local file and permission for this file. (chmod 777 filename.json);
+//const char* path = "/home/pi/workingDir/output.json"; //requires local file and permission for this file. (chmod 777 filename.json);
 
-Chair chair1 = Chair(ip, 3333); // create object of type chair
+//Chair chair1 = Chair(ip, 3333); // create object of type chair
+Bed bed1("192.168.3.11", 3333);
 while(1){
-chair1.handleActions();
-
-//TODO read PHP, decide actions for device, set data for  this device, handle device
+//chair1.handleActions();
+bed1.handleActions();
+//TODO read PHP, decide actions for device, set data for  this device, handle device. Currently done per device. might not be necessary to do in main.
 
 }
 //cin.get();

@@ -4,14 +4,17 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../Source/devices/Bed.cpp \
 ../Source/devices/Chair.cpp \
 ../Source/devices/Column.cpp 
 
 OBJS += \
+./Source/devices/Bed.o \
 ./Source/devices/Chair.o \
 ./Source/devices/Column.o 
 
 CPP_DEPS += \
+./Source/devices/Bed.d \
 ./Source/devices/Chair.d \
 ./Source/devices/Column.d 
 

@@ -59,7 +59,6 @@ void Chair::handleBedtime(){
 void Chair::handleAggression(){ //checks how many times user was seated during a 10 seconds timeframe.
 	phpCom->updateDataRead();
 	if(phpCom->phpDataJson.value("aggressive", 8) == 0){
-
 		if(getTimePastInSeconds() >= 1.0){
 			if (trackerIndex == 10){
 				trackerIndex = 0;
@@ -73,7 +72,7 @@ void Chair::handleAggression(){ //checks how many times user was seated during a
 					phpCom->writeToFile();
 				}
 				else {
-					outputs["vibrate"] = 1;
+					outputs["vibrate"] = 0;
 				}
 			}
 			else{
