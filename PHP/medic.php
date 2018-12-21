@@ -11,6 +11,7 @@
       }
       div {
         box-sizing: border-box;
+      // The code below makes sure the images align correctly in both landscape and portrait mode screens.
       }
       @media only screen and (max-width: 800px) {
         img {
@@ -36,9 +37,10 @@
   </head>
   <body>
     <?php
-      $path = "/var/www/html/jason.json";
+      $path = "/var/www/html/jason.json"; // The path to the used JSON file
       read();
 
+      // A simple read function. Reads the JSON from the file, decodes it and stores the data as an object.
       function read() {
         global $path, $myobj;
         $myfile = fopen($path, "r") or die("Unable to open the data file");
@@ -47,6 +49,7 @@
         $myobj = json_decode($mystring);
       }
 
+      // A simple write function. Encodes our object to JSON and writes it to the specified file.
       function write() {
         global $myobj, $path;
         $myJSON = json_encode($myobj);
@@ -55,6 +58,7 @@
         fclose($myfile);
       }
 
+      // A simple switch function to open or close the door on the press of a button.
       function dooropen() {
         global $myobj;
         if ($myobj->dooropen == 1) {
@@ -67,6 +71,7 @@
         write();
       }
 
+      // Checks if any calls have been made and hands any required alert to Javascript
       function checkCalls() {
         global $myobj;
         if ($myobj->emergency == 1) {
@@ -80,6 +85,7 @@
         }
       }
 
+      // The following three functions simply reset the calls
       function resetEmergency() {
         global $myobj;
         $myobj->emergency = 0;
@@ -99,6 +105,7 @@
       }
 
     ?>
+    // Since all the sizing and visual work is done in CSS, the HTML here is incredibly simplistic.
     <h1>Monitoring: Hank.</h1></br>
     <img src="LightOn.png" alt="Lights are on.">
     <img src="bed.png" alt="Hank is in bed.">
@@ -106,13 +113,16 @@
     <img src="Fist.png" alt="Hank is currently not aggressive." onClick="stopAggressive()">
     <img src="Staff.png" alt="Hank doens't need assistance." onClick="stopStaff()">
     <img src="Emergency.png" alt="There is no alert." onClick="stopEmergency()">
-	<script language="javascript">
+
+    <script language="javascript">
+          // A simple call that also alerts the user that the door has been opened/closed.
 	  function doorswitch() {
 		var result = "<?php dooropen();?>";
                 alert(result);
 		location.reload();
 	  }
 
+          // Checks for any calls made upon loading, immediately throwing an alert if so.
           window.onload = function(){
             var result="<?php checkCalls();?>";
             if (result!="0") {
@@ -120,6 +130,7 @@
             }
           };
 
+          // The following three functions are simple php function calls that reset any alerts.
           function stopEmergency() {
             var result = "<?php resetEmergency();?>";
             location.reload();
@@ -135,6 +146,7 @@
             location.reload();
           }
 
+          // Reloads the page every 5 seconds if no alerts have been triggered.
           setInterval(function(){
             var result="<?php checkCalls();?>";
             if (result=="0") {
