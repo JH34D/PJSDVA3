@@ -15,6 +15,7 @@
 #include "sockClient.h" // class with socket functions
 #include "devices/Chair.h"
 #include "devices/Bed.h"
+#include "devices/Column.h"
 
 using namespace std;
 using namespace nlohmann;
@@ -34,9 +35,11 @@ const char* ip = "192.168.3.10";
 
 //Chair chair1 = Chair(ip, 3333); // create object of type chair
 Bed bed1("192.168.3.11", 3333);
+Column column1("192.168.3.114", 3333);
 while(1){
 //chair1.handleActions();
 bed1.handleActions();
+column1.handleActions();
 //TODO read PHP, decide actions for device, set data for  this device, handle device. Currently done per device. might not be necessary to do in main.
 
 }
