@@ -59,7 +59,7 @@ void Chair::handleBedtime(){
 void Chair::handleAggression(){ //checks how many times user was seated during a 10 seconds timeframe.
 	phpCom->updateDataRead();
 	if(phpCom->phpDataJson.value("aggressive", 8) == 0){
-		if(getTimePastInSeconds() >= 1.0){
+		if(getTimePassedInSeconds() >= 1.0){
 			if (trackerIndex == 10){
 				trackerIndex = 0;
 				int sum = 0;
@@ -92,7 +92,7 @@ void Chair::handleAggression(){ //checks how many times user was seated during a
 	}
 }
 
-double Chair::getTimePastInSeconds(){
+double Chair::getTimePassedInSeconds(){
 	return difftime(time(0), lastMeasurement);
 }
 
