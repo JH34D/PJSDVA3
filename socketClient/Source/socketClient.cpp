@@ -20,9 +20,11 @@ using namespace std;
 using namespace nlohmann;
 
 /*
- * TODO general:
+ * TODO:
  * -add const keyword to function where no attributes are changed.
- * -
+ * -add option for "Crosstalk"  between devices.
+ * -Set receive Timeout to  a lower value
+ * -update PHP in handle action function
  */
 
 
