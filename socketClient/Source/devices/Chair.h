@@ -28,7 +28,7 @@ private:
 	bool aggressionTracker[10];
 	time_t lastMeasurement;
 	int trackerIndex;
-	double getTimePastInSeconds();
+	double getTimePassedInSeconds();
 	//located = hanks room?
 //date bought?
 	//Aggression

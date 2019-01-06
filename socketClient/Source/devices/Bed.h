@@ -16,6 +16,8 @@ public:
 	void handleActions();
 private:
 	void outOfBed();
+	void bedLight();
+	bool ledStatus = false;
 };
 
 #endif /* DEVICES_BED_H_ */

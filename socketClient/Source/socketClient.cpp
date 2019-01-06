@@ -32,16 +32,16 @@ using namespace nlohmann;
 int main(int argc, char** argv)
 {
 
-const char* ip = "192.168.3.10";
+//const char* ip = "192.168.3.10";
 //const char* path = "/home/pi/workingDir/output.json"; //requires local file and permission for this file. (chmod 777 filename.json);
 
 //Chair chair1 = Chair(ip, 3333); // create object of type chair
 Bed bed1("192.168.3.11", 3333);
-Column column1("192.168.3.114", 3333);
+//Column column1("192.168.3.114", 3333);
 while(1){
 //chair1.handleActions();
 bed1.handleActions();
-column1.handleActions();
+//column1.handleActions();
 //TODO read PHP, decide actions for device, set data for  this device, handle device. Currently done per device. might not be necessary to do in main.
 
 }
