@@ -27,9 +27,7 @@ char pass[] = "P@ssw0rd";
 WiFiServer wifiServerWemos(3333); //create object of wifiserver which will listen on the specified port
 char receivedData[4096]; //create array to store received data
 uint16_t rdIndex = 0; //index for receivedData array
-//char sensors[] = "{\"sittingDown\":0}";
-//char actions[] = "{\"vibrate\":0}";
-
+bool buttonPressed = false;
 void setup() {
   // put your setup code here, to run once:
   Wire.begin();
@@ -67,7 +65,7 @@ void loop() {
   //client handling
   WiFiClient client = wifiServerWemos.available(); //check for and accept connections
 
-  if (client) { //if connection has been acceted
+  if (client) { //if connection has been accepted
     //print data of connected client
     IPAddress clientIP = client.remoteIP(); //store client IP
     uint16_t clientPort = client.localPort();
@@ -83,29 +81,40 @@ void loop() {
         if (receivedData[0] == 'i') { //indicates request for input
           StaticJsonBuffer<200> jsonBuffer2;
           JsonObject& sensorsJson = jsonBuffer2.createObject();
-          //if adc
-          sensorsJson.set("lays", 1);
+          if (readAdc() >= 700) {
+            sensorsJson.set("inBed", 1);
+          }
+          else {
+            sensorsJson.set("inBed", 0);
+          }
+          if (buttonPressed) {
+            sensorsJson.set("switchLed", 1);
+            buttonPressed = 0;
+          }
+          else {
+            sensorsJson.set("switchLed", 0);
+          }
           String response;
           sensorsJson.printTo(response);
           client.print(response);
+
         }
         else if (receivedData[0] == 'o') { //indicates request for output
           char* request = receivedData + 2; //stip request indicator and space
           Serial.println("request is: " + (String) request);
           StaticJsonBuffer<200> jsonBuffer1;
           JsonObject& outputsJson = jsonBuffer1.parseObject(request);
-          bool vibrate = outputsJson["vibrate"]; //variable = value of key chair in json
-          if (vibrate) {
-            setIOOutput(2);
-          }
-          else {
-            setIOOutput(0);
-
-          }
+          bool led = outputsJson["ledState"];
+          setIOOutput(led);
         }
 
         rdIndex = 0; //reset index
         receivedData[0] = '\0'; //set start of string as end of string
+      }
+      if (!buttonPressed) {
+        if (readIO() == 15) { //add small delay?
+          buttonPressed = 1;
+        }
       }
       while (client.available() > 0) { //while data from client availabel
 
@@ -120,6 +129,7 @@ void loop() {
     Serial.println("Client disconnected");
 
   }
+
 
 }
 
