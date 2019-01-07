@@ -20,20 +20,34 @@ void Bed::handleActions(){
 	requestInputs();
 	bedLight();
 	outOfBed();
-	/*
-	 * seintje als langer uit bed dan x (TODO get time of day naar functie met struct als return?)
-	 * Bedlampje uit na bepaalde tijd. (10 min?)
-	 * bedlampje schakelen bij druk op de knop.
-	 * melding als om 22:30 nog niet in bed
-	 */
-
 	setOutputs();
 }
 
 void Bed::outOfBed(){
+	time_t rawTime = time(0);
+	struct tm* currentTime;
+	currentTime = localtime(&rawTime);
+	if(currentTime->tm_hour > 21 || currentTime->tm_hour < 7){
+		int lays = inputs.value("pressure", 1250); //get value if error return 1250
+		if (lays == 1250){ //check for error
+			cerr << "Error while reading input values. Sits could not be found in Json object." << endl;
+			return;
+		}
+		if(lays > 700){
+			inBed = 1;
+		}
+		else{
+			inBed = 0;
+			if(prevInBedState){
+				timeOutOfBed = time(0);
+			}
+		}
+		if(inBed == 0 && getTimePassedInMinutes(timeOutOfBed) >= 30.00){
+			//write "notInBed":1 to php;
+		}
+		prevInBedState = inBed;
+	}
 
-	//todo
-	//als liggen 0 wordt, start check for x tijd verlopen, als tijd behaald, stuur melding via php
 }
 void Bed::bedLight(){
 	int switchLed = inputs.value("switchLed", 2);
@@ -44,5 +58,18 @@ void Bed::bedLight(){
 	else if(switchLed){
 		ledStatus = !ledStatus;
 		outputs["ledState"] = ledStatus;
+		if(ledStatus){
+			ledOnTime = time(0);
+		}
+
 	}
+	if(ledStatus && getTimePassedInMinutes(ledOnTime) >= 15.00){ //if light has been on for 15 minutes, turn off
+		ledStatus = 0;
+		outputs["ledState"] = ledStatus;
+	}
+
+}
+
+double Bed::getTimePassedInMinutes(time_t prev){
+	return difftime(time(0), prev)/60;
 }

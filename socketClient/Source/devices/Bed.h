@@ -18,6 +18,12 @@ private:
 	void outOfBed();
 	void bedLight();
 	bool ledStatus = false;
+	time_t timeOutOfBed;
+	time_t ledOnTime;
+	bool inBed;
+	bool prevInBedState;
+	double getTimePassedInMinutes(time_t prev);
+
 };
 
 #endif /* DEVICES_BED_H_ */
