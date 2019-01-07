@@ -81,12 +81,7 @@ void loop() {
         if (receivedData[0] == 'i') { //indicates request for input
           StaticJsonBuffer<200> jsonBuffer2;
           JsonObject& sensorsJson = jsonBuffer2.createObject();
-          if (readAdc() >= 700) {
-            sensorsJson.set("inBed", 1);
-          }
-          else {
-            sensorsJson.set("inBed", 0);
-          }
+          sensorsJson.set("pressure", readAdc());
           if (buttonPressed) {
             sensorsJson.set("switchLed", 1);
             buttonPressed = 0;
