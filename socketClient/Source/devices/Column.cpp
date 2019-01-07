@@ -47,7 +47,7 @@ void Column::fireAlarm(){
 			//todo send to PHP no fire
 		}
 		else {
-			outputs["fireAlarm"] = 1; //if fire then fire alarm
+			outputs["fireAlarm"] = 3; //if fire then fire alarm
 			//todo send to PHP fire
 		}
 }
