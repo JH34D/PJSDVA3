@@ -13,22 +13,24 @@
 #include <WiFiUdp.h>
 #include <Wire.h> //lib for i2c
 #include <ArduinoJson.h> //json https://github.com/bblanchon/ArduinoJson, installed using the arduino library manager.
+#include <Adafruit_NeoPixel.h> //for the leds
 
 //bronnen: Voorbeeldcode BB, https://techtutorialsx.com/2018/06/02/esp8266-arduino-socket-server/
 
 #define I2C_SCL    D1
 #define I2C_SDA    D2
+#define PIN D5
+
+Adafruit_NeoPixel pixels = Adafruit_NeoPixel(3, PIN, NEO_GRB + NEO_KHZ800);
 
 
 //Wifi gegevens
-char ssid[] = "Korsakov";
+char ssid[] = "piBFJ";
 char pass[] = "P@ssw0rd";
 
 WiFiServer wifiServerWemos(3333); //create object of wifiserver which will listen on the specified port
 char receivedData[4096]; //create array to store received data
 uint16_t rdIndex = 0; //index for receivedData array
-//char sensors[] = "{\"sittingDown\":0}";
-//char actions[] = "{\"vibrate\":0}";
 
 void setup() {
   // put your setup code here, to run once:
@@ -37,12 +39,14 @@ void setup() {
   setIOConfig(15); //select I/O mode
   setIOOutput(0); //start with all outputs 0
   //set static ip outside dhcp scope
-  IPAddress ip(192, 168, 3, 10);
+  IPAddress ip(192, 168, 3, 13);
   IPAddress gateway(192, 168, 3, 90);
   IPAddress subnet(255, 255, 255, 0);
   WiFi.config(ip, gateway, subnet);
   // Connect to Wi-Fi network
   WiFi.mode(WIFI_STA); //set client mode
+  pixels.begin(); //from the ada libary
+  pinMode(D5, OUTPUT);
   WiFi.begin(ssid, pass); //begin connection (ssid and password)
   while (WiFi.status() != WL_CONNECTED) { //print a dot as long as the status isnt equal to connected.
     delay(500);
@@ -58,37 +62,16 @@ void setup() {
   wifiServerWemos.begin();
 
   receivedData[0] = '\0';
-  
+
 
 }
 
 void loop() {
-  /*
-     Chair
-
-    I/O Description Mfr. No:  Mfr.
-    DI 0  Push Button
-    DI 1
-    DI 2
-    DI 3
-    DO 4  LED
-    DO 5  Vibration Motor
-    DO 6
-    DO 7
-    AI 0  Force Sensor  SEN-09375 Sparkfun
-    AI 1
-
-
-    functionele werking stoel:
-    trillen (bijv na 10 uur. aansturing via Pi)
-    lezen druksensor (melding als in stoel)
-  */
-
 
   //client handling
   WiFiClient client = wifiServerWemos.available(); //check for and accept connections
-
-  if (client) { //if connection has been acceted
+  
+  if (client) { //if connection has been accepted
     //print data of connected client
     IPAddress clientIP = client.remoteIP(); //store client IP
     uint16_t clientPort = client.localPort();
@@ -101,40 +84,41 @@ void loop() {
 
       if (receivedData[0] != '\0') { //data has been placed in array because the first char isnt the end of the string
         receivedData[rdIndex] = '\0'; //Add terminate string indicator at end of chars
-        
-
         if (receivedData[0] == 'i') { //indicates request for input
-
           StaticJsonBuffer<200> jsonBuffer2;
           JsonObject& sensorsJson = jsonBuffer2.createObject();
-          if (readAdc() > 700) {
-            sensorsJson.set("sits", 1);
-          }
-          else {
-            sensorsJson.set("sits", 0);
-          }
+          
+          
+          sensorsJson.set("windowLDR", readAdc0()); //analog input from LDR
+          sensorsJson.set("potmeterLed", readAdc1()); //analog input from potmeter
+          
           String response;
           sensorsJson.printTo(response);
           client.print(response);
+
         }
         else if (receivedData[0] == 'o') { //indicates request for output
           char* request = receivedData + 2; //stip request indicator and space
           Serial.println("request is: " + (String) request);
           StaticJsonBuffer<200> jsonBuffer1;
           JsonObject& outputsJson = jsonBuffer1.parseObject(request);
-          bool vibrate = outputsJson["vibrate"]; //variable = value of key chair in json
-          if (vibrate) {
-            setIOOutput(2);
-          }
-          else {
-            setIOOutput(0);
-            
-          }
+          int bright = outputsJson["windowLed"];
+          bool blend = outputsJson["windowBlend"];
+          
+          pixels.setPixelColor(0, pixels.Color(bright, bright, bright));
+          pixels.show();
+          pixels.setPixelColor(1, pixels.Color(bright, bright, bright));
+          pixels.show();
+          pixels.setPixelColor(2, pixels.Color(bright, bright, bright));
+          pixels.show();
+
+          setIOOutput(blend);
         }
 
         rdIndex = 0; //reset index
         receivedData[0] = '\0'; //set start of string as end of string
       }
+      
       while (client.available() > 0) { //while data from client availabel
 
         char c = client.read(); //read char
@@ -148,6 +132,7 @@ void loop() {
     Serial.println("Client disconnected");
 
   }
+
 
 }
 
@@ -174,7 +159,7 @@ unsigned int readIO() {
   return input & 0x0F;
 }
 
-unsigned int readAdc() {
+unsigned int readAdc0() {
   Wire.requestFrom(0x36, 4);
   unsigned int anin0 = Wire.read() & 0x03;
   anin0 = anin0 << 8;
@@ -186,6 +171,17 @@ unsigned int readAdc() {
   return anin0;
 }
 
+unsigned int readAdc1() {
+  Wire.requestFrom(0x36, 4);
+  unsigned int anin0 = Wire.read() & 0x03;
+  anin0 = anin0 << 8;
+  anin0 = anin0 | Wire.read();
+  unsigned int anin1 = Wire.read() & 0x03;
+  anin1 = anin1 << 8;
+  anin1 = anin1 | Wire.read();
+
+  return anin1;
+}
 
 
 
