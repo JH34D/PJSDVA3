@@ -31,6 +31,8 @@ void Bed::handleActions(){
 }
 
 void Bed::outOfBed(){
+
+	//todo
 	//als liggen 0 wordt, start check for x tijd verlopen, als tijd behaald, stuur melding via php
 }
 void Bed::bedLight(){
