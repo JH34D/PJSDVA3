@@ -50,13 +50,12 @@ void Door::handleFire(){
 			if (fireDetector == 1050){ //check for error
 				cerr << "Error while reading input values. fireDetector could not be found in Json object in function handleFire in class Door" << endl;
 				fireDetector = 0;
-				//return;
 			}
-			if (fireDetector > 200 && fireDetector < 450) {
-				outputs["openDoor"] = 0;
+			if (fireDetector > 450) { //above 450 there is fire detected
+				outputs["openDoor"] = 1; //if fire then the door opens
 			}
 			else {
-				outputs["openDoor"] = 1;
+				outputs["openDoor"] = 0;
 			}
 }
 

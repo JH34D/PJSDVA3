@@ -42,10 +42,12 @@ void Column::fireAlarm(){
 			fireDetector = 0;
 			//return;
 		}
-		if (fireDetector > 200 && fireDetector < 450) {
+		if (fireDetector < 450) { //above 450 fire is detected
 			outputs["fireAlarm"] = 0;
+			//todo send to PHP no fire
 		}
 		else {
-			outputs["fireAlarm"] = 1;
+			outputs["fireAlarm"] = 1; //if fire then fire alarm
+			//todo send to PHP fire
 		}
 }
