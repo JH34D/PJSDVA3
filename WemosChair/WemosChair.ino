@@ -27,8 +27,6 @@ char pass[] = "P@ssw0rd";
 WiFiServer wifiServerWemos(3333); //create object of wifiserver which will listen on the specified port
 char receivedData[4096]; //create array to store received data
 uint16_t rdIndex = 0; //index for receivedData array
-//char sensors[] = "{\"sittingDown\":0}";
-//char actions[] = "{\"vibrate\":0}";
 
 void setup() {
   // put your setup code here, to run once:
@@ -63,26 +61,6 @@ void setup() {
 }
 
 void loop() {
-  /*
-     Chair
-
-    I/O Description Mfr. No:  Mfr.
-    DI 0  Push Button
-    DI 1
-    DI 2
-    DI 3
-    DO 4  LED
-    DO 5  Vibration Motor
-    DO 6
-    DO 7
-    AI 0  Force Sensor  SEN-09375 Sparkfun
-    AI 1
-
-
-    functionele werking stoel:
-    trillen (bijv na 10 uur. aansturing via Pi)
-    lezen druksensor (melding als in stoel)
-  */
 
 
   //client handling
@@ -107,12 +85,13 @@ void loop() {
 
           StaticJsonBuffer<200> jsonBuffer2;
           JsonObject& sensorsJson = jsonBuffer2.createObject();
-          if (readAdc() > 700) {
-            sensorsJson.set("sits", 1);
+          /*if (readAdc() > 700) {
+            sensorsJson.set("pressure", 1);
           }
           else {
-            sensorsJson.set("sits", 0);
-          }
+            sensorsJson.set("pressure", 0);
+          }*/
+          sensorsJson.set("pressure", readAdc());
           String response;
           sensorsJson.printTo(response);
           client.print(response);
