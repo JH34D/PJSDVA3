@@ -6,7 +6,7 @@
 using namespace std;
 using namespace nlohmann;
 
-Fridge::Fridge(string ip, int port,const char* path):Device(ip,port,path) {
+Fridge::Fridge(string ip, int port):Device(ip,port) {
 	// TODO Auto-generated constructor stub
 
 }

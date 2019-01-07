@@ -12,7 +12,7 @@
 
 class Fridge : public Device {
 public:
-	Fridge(string, int, const char*);
+	Fridge(string, int);
 	virtual ~Fridge();
 	void handleActions();
 

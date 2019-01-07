@@ -17,6 +17,10 @@ public:
 	virtual ~Window();
 	void handleActions();
 private:
+	int potmeterLedOld;
+	void handleLed();
+	void handleSun();
+	void handlePHP();
 
 };
 

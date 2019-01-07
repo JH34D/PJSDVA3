@@ -7,18 +7,24 @@ CPP_SRCS += \
 ../Source/devices/Bed.cpp \
 ../Source/devices/Chair.cpp \
 ../Source/devices/Column.cpp \
+../Source/devices/Door.cpp \
+../Source/devices/Frigde.cpp \
 ../Source/devices/Window.cpp 
 
 OBJS += \
 ./Source/devices/Bed.o \
 ./Source/devices/Chair.o \
 ./Source/devices/Column.o \
+./Source/devices/Door.o \
+./Source/devices/Frigde.o \
 ./Source/devices/Window.o 
 
 CPP_DEPS += \
 ./Source/devices/Bed.d \
 ./Source/devices/Chair.d \
 ./Source/devices/Column.d \
+./Source/devices/Door.d \
+./Source/devices/Frigde.d \
 ./Source/devices/Window.d 
 
 

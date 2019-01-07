@@ -12,7 +12,7 @@
 
 class Door : public Device {
 public:
-	Door(string, int, const char*);
+	Door(string, int);
 	virtual ~Door();
 	void handleActions();
 

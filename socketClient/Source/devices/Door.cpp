@@ -13,7 +13,7 @@
 using namespace std;
 using namespace nlohmann;
 
-Door::Door(string ip, int port,const char* path):Device(ip,port,path) {
+Door::Door(string ip, int port):Device(ip,port) {
 	// TODO Auto-generated constructor stub
 
 }
