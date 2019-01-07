@@ -44,9 +44,13 @@ void Window::handleLed(){
 			potmeterLed = 0;
 			//return;
 		}
-		if (potmeterLedOld != potmeterLed) {
-			if (potmeterLed > 1020){
+		int minus = potmeterLedOld - potmeterLed;
+		if ( minus > 10 || minus < -10) {
+			if (potmeterLed > 1000){
 				potmeterLed = 1020;
+			}
+			if (potmeterLed < 13){
+				potmeterLed = 0;
 			}
 			sendToWhemos = potmeterLed / 4;
 			outputs["windowLed"] = sendToWhemos;
@@ -63,7 +67,7 @@ void Window::handleSun(){
 			LDR = 0;
 			//return;
 		}
-		if (LDR > 400) { //if it is above 400 the sun is to bright
+		if (LDR > 800) { //if it is above 400 the sun is to bright
 			outputs["windowBlend"] = 1; //the window will blend
 		}
 		else {
