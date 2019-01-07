@@ -38,7 +38,7 @@ void Column::fireAlarm(){
 	
 	int fireDetector = inputs.value("fireDetector", 1050); //get value if error return 1050
 		if (fireDetector == 1050){ //check for error
-			cerr << "Error while reading input values. fireDetector could not be found in Json object in function handleBedtime() in class chair" << endl;
+			cerr << "Error while reading input values. fireDetector could not be found in Json" << endl;
 			fireDetector = 0;
 			//return;
 		}
