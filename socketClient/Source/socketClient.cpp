@@ -41,8 +41,8 @@ int main(int argc, char** argv)
 
 //Chair chair1 = Chair("192.168.3.10", 3333); // create object of type chair
 //Bed bed1("192.168.3.11", 3333);
-Column column1("192.168.3.12", 3333);
-//Window window1("192.168.3.13", 3333);
+//Column column1("192.168.3.12", 3333);
+Window window1("192.168.3.13", 3333);
 //Door door1("192.168.3.14", 3333);
 //Fridge fridge1("192.168.3.15", 3333);
 
@@ -50,8 +50,8 @@ while(1){
 
 //chair1.handleActions();
 //bed1.handleActions();
-column1.handleActions();
-//window1.handleActions();
+//column1.handleActions();
+window1.handleActions();
 //door1.handleActions();
 //fridge1.handleActions();
 
