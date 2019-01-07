@@ -26,7 +26,13 @@ using namespace nlohmann;
  * -add option for "Crosstalk"  between devices.
  * -Set receive Timeout to  a lower value
  * -update PHP in handle action function
+ *
+ *
  */
+
+
+
+
 
 
 int main(int argc, char** argv)
