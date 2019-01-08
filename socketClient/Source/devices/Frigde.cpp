@@ -38,18 +38,20 @@ void Fridge::handleFridge(){
 				}
 }
 void Fridge::handleTemp(){
-	int tempSensor = inputs.value("tempSensor", 1050);
-	if (tempSensor == 1050){ //check for error
+	int tempSensor = inputs.value("tempSensor", 20);
+	if (tempSensor == 20){ //check for error
 						cerr << "Error while reading input values. TempSensor could not be found in Json object in function handleBedtime() in class Fridge" << endl;
 						tempSensor = 0;
 						//return;
 					}
 					if (tempSensor < 7) {
-						outputs["fridge"] = 1;
+						outputs["fridgeTemp"] = 1;
 					}
 					else {
 
-						outputs["fridge"] = 0;
+						outputs["fridgeTemp"] = 0;
 					}
 
 }
+
+

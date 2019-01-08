@@ -19,7 +19,7 @@ public:
 private:
 	void handleDoor();
 	void handleFire();
-
+	void handlePhp();
 };
 
 

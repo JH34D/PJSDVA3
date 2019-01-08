@@ -36,13 +36,18 @@ int main(int argc, char** argv)
 {
 
 //const char* ip = "192.168.3.10";
-//const char* path = "/home/pi/workingDir/output.json"; //requires local file and permission for this file. (chmod 777 filename.json);
+//const char* path = "/home/pi/workingDir/output.json"; //requires local file and permission for this file. (chmod 777 filename.json) path is currently hardcoded within the PHP constructor
 
 
 //Chair chair1 = Chair("192.168.3.10", 3333); // create object of type chair
 //Bed bed1("192.168.3.11", 3333);
+<<<<<<< HEAD
 Column column1("192.168.3.12", 3333);
 Window window1("192.168.3.13", 3333);
+=======
+//Column column1("192.168.3.12", 3333);
+//Window window1("192.168.3.13", 3333);
+>>>>>>> ba05ba397cc48196cea5947c372782dc750d9060
 //Door door1("192.168.3.14", 3333);
 //Fridge fridge1("192.168.3.15", 3333);
 
@@ -50,8 +55,13 @@ while(1){
 
 //chair1.handleActions();
 //bed1.handleActions();
+<<<<<<< HEAD
 column1.handleActions();
 window1.handleActions();
+=======
+//column1.handleActions();
+//window1.handleActions();
+>>>>>>> ba05ba397cc48196cea5947c372782dc750d9060
 //door1.handleActions();
 //fridge1.handleActions();
 

@@ -37,8 +37,8 @@ void Chair::handleActions(){
 
 void Chair::handleBedtime(){
 
-	int sits = inputs.value("sits", 8); //get value if error return 8
-	if (sits == 8){ //check for error
+	int sits = inputs.value("pressure", 1250); //get value if error return 8
+	if (sits == 1250){ //check for error
 		cerr << "Error while reading input values. Sits could not be found in Json object in function handleBedtime() in class chair" << endl;
 		sits = 0;
 		//return;
@@ -47,7 +47,7 @@ void Chair::handleBedtime(){
 	struct tm* currentTime;
 	currentTime = localtime(&rawTime);
 	//currentTime->tm_hour = 22; //testing.
-	if (sits && (currentTime->tm_hour > 21 || currentTime->tm_hour < 7)){
+	if (sits > 700 && (currentTime->tm_hour > 21 || currentTime->tm_hour < 7)){
 		outputs["vibrate"] = 1;
 	}
 	else {
@@ -58,12 +58,13 @@ void Chair::handleBedtime(){
 
 void Chair::handleAggression(){ //checks how many times user was seated during a 10 seconds timeframe.
 	phpCom->updateDataRead();
-	if(phpCom->phpDataJson.value("aggressive", 8) == 0){
+	if(phpCom->phpDataJson.value("aggressive", 8) == 0){ //if data for php has not been set or reset by php
 		if(getTimePassedInSeconds() >= 1.0){
 			if (trackerIndex == 10){
+
 				trackerIndex = 0;
 				int sum = 0;
-				for (int i = 0; i>= 9; i++){
+				for(int i = 0; i<10; i++){
 					sum += aggressionTracker[i];
 				}
 				if(sum <= 8 && sum > 2){ //if user stood up twice or sat down more than twice during the last 10 seconds, make chair vibrate
@@ -76,14 +77,20 @@ void Chair::handleAggression(){ //checks how many times user was seated during a
 				}
 			}
 			else{
-				//move to function?
-				int sits = inputs.value("sits", 8); //get value if error return 8
-						if (sits == 8){ //check for error
-							cerr << "Error while reading input values. Sits could not be found in Json object in function handleAggression() in class chair" << endl;
+				int sits = inputs.value("pressure", 1250); //get value if error return 8
+						if (sits == 1250){ //check for error
+							cerr << "Error while reading input values. Sits could not be found in Json object." << endl;
 							sits = 0;
 							return;
 						}
-				aggressionTracker[trackerIndex++] = sits;
+						//cout << "sits is " << sits << endl; //todo remove line
+						if (sits > 700){
+							aggressionTracker[trackerIndex++] = 1;
+						}
+						else{
+							aggressionTracker[trackerIndex++] = 0;
+						}
+
 			}
 			lastMeasurement = time(0);
 

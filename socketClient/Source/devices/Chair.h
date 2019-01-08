@@ -29,9 +29,7 @@ private:
 	time_t lastMeasurement;
 	int trackerIndex;
 	double getTimePassedInSeconds();
-	//located = hanks room?
-//date bought?
-	//Aggression
+
 
 };
 
