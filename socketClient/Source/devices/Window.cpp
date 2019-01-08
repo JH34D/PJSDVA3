@@ -44,8 +44,8 @@ void Window::handleLed(){
 			potmeterLed = 0;
 			//return;
 		}
-		int minus = potmeterLedOld - potmeterLed;
-		if ( minus > 10 || minus < -10) {
+		//int minus = potmeterLedOld - potmeterLed;
+		if ( potmeterLedOld != potmeterLed ) {
 			if (potmeterLed > 1000){
 				potmeterLed = 1020;
 			}
