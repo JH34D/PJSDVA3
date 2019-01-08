@@ -7,7 +7,7 @@
 
 #include "Bed.h"
 
-Bed::Bed(string ip, int port) : Device(ip, port) {
+Bed::Bed(string ip, int port) : Device(ip, port), inBed(0), prevInBedState(0), timeOutOfBed(0), ledOnTime(0) {
 	// TODO Auto-generated constructor stub
 
 }
