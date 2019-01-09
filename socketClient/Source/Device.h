@@ -27,7 +27,7 @@ protected:
 	nlohmann::json inputs; //used to store input data.
 	nlohmann::json outputs; //used to store data to set output
 	static Php *phpCom;
-	//TODO add static Json/array for crosstalk between devices. e.g. Turn off lights when in bed after x time or open door if fire has been detected.
+	static nlohmann::json interDevCom; //json object shared between all classes derived from device. Used to allow different classes to set information for other classes.
 private:
 	void initConnection();
 };
