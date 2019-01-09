@@ -23,7 +23,7 @@ void Bed::handleActions(){
 	setOutputs();
 }
 
-void Bed::outOfBed(){
+void Bed::outOfBed(){ //TODO add php notification to hank between 22 00 and 22 30, notfication to caretaker if not in bed after 22 30
 	time_t rawTime = time(0);
 	struct tm* currentTime;
 	currentTime = localtime(&rawTime);
