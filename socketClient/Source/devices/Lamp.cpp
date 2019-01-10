@@ -25,8 +25,8 @@ void Lamp::handleActions(){
 }
 
 void Lamp::lampLight(){
-	forcedOn = motion;
-	int switchLed = inputs.value("switchLed", 2);
+	forcedOn = motion; // Hergebruik motion?
+	int switchLed = inputs.value("switchLed", 2) ; //switchled bestaat niet in je arduino code
 	if (switchLed == 2){
 		cerr << "Error while reading switchLed" << endl;
 		return;

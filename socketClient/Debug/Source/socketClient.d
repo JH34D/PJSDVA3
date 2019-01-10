@@ -5,7 +5,7 @@ Source/socketClient.o: ../Source/socketClient.cpp \
  ../Source/devices/../sockClient.h ../Source/devices/../Php.h \
  ../Source/devices/Bed.h ../Source/devices/Column.h \
  ../Source/devices/Door.h ../Source/devices/Fridge.h \
- ../Source/devices/Window.h
+ ../Source/devices/Window.h ../Source/devices/Lamp.h
 
 /home/programmer/jsonLib/json.hpp:
 
@@ -32,3 +32,5 @@ Source/socketClient.o: ../Source/socketClient.cpp \
 ../Source/devices/Fridge.h:
 
 ../Source/devices/Window.h:
+
+../Source/devices/Lamp.h:
