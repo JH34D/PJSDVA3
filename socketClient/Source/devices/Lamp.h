@@ -11,6 +11,8 @@
 #include <iostream>
 #include "../Device.h"
 
+
+
 class Lamp : public Device {
 public:
 	Lamp(string ip, int port);
@@ -19,6 +21,9 @@ public:
 private:
 	void lampLight();
 	void handleMotion();
+	int motion;
+	int forcedOn;
+	bool ledStatus;
 
 };
 

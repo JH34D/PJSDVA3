@@ -6,8 +6,9 @@
  */
 
 #include "Lamp.h"
+using namespace std;
 
-Lamp::Lamp(string ip, int port) : Device(ip, port), int motion, int forcedOn {
+Lamp::Lamp(string ip, int port) : Device(ip, port), motion(0), forcedOn(0), ledStatus(0) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -19,7 +20,7 @@ Lamp::~Lamp() {
 void Lamp::handleActions(){
 	requestInputs();
 	lampLight();
-	handleMotion
+	handleMotion();
 	setOutputs();
 }
 

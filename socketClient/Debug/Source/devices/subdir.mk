@@ -9,6 +9,7 @@ CPP_SRCS += \
 ../Source/devices/Column.cpp \
 ../Source/devices/Door.cpp \
 ../Source/devices/Frigde.cpp \
+../Source/devices/Lamp.cpp \
 ../Source/devices/Window.cpp 
 
 OBJS += \
@@ -17,6 +18,7 @@ OBJS += \
 ./Source/devices/Column.o \
 ./Source/devices/Door.o \
 ./Source/devices/Frigde.o \
+./Source/devices/Lamp.o \
 ./Source/devices/Window.o 
 
 CPP_DEPS += \
@@ -25,6 +27,7 @@ CPP_DEPS += \
 ./Source/devices/Column.d \
 ./Source/devices/Door.d \
 ./Source/devices/Frigde.d \
+./Source/devices/Lamp.d \
 ./Source/devices/Window.d 
 
 
