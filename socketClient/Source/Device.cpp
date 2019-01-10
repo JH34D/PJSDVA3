@@ -39,9 +39,7 @@ void Device::setOutputs(){
 		outputsOld = outputs;
 	}
 }
-/*
-void Device::tempPHPHandler(){
-	//phpRw = nlohmann::json::parse(phpCom.readFile());
+void Device::handleActions(){
+	cout << "please overwrite this function in the derived class" << endl;
 }
-*/
 

@@ -21,6 +21,7 @@ public:
 	virtual ~Device();
 	void requestInputs(); //gets input data from connected device
 	void setOutputs(); //sends data to connected device
+	virtual void handleActions();
 	//TODO add function for php
 protected:
 	sockClient wemosCom; //used for communication with c on the WeMos
