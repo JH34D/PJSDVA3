@@ -1,51 +1,66 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Opening page</title>
-    <style type="text/css">
-      body,html {
-        padding: 3px 3px 3px 3px;
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
 
-        background-color: #D8DBE2;
+h2{
+text-align: center;
+}
 
-        font-family: Arial, sans-serif;
-        font-size: 11pt;
-        text-align: center;
-      }
-      h1 {
-        font-size: 60pt;
-      }
-    </style>
-  </head>
-  <body>
-    <script>
-      function getin() {
-        var tested = 1;
-        var prompt1 = prompt('Please enter your PIN code','');
-        while (tested < 3) {
-          if (!prompt1)
-            history.go(-1);
-          if (prompt1 == "1111") {
-            window.open('hank.php');
-            break;
-          } else if (prompt1 == "2222") {
-            window.open('porter.php');
-            break;
-          } else if (prompt1 == "3333") {
-            window.open('medic.php');
-            break;
-          }
-          testV+=1;
-          var prompt1 = prompt('Incorrect PIN code. Please try again','');
-        }
-        if (prompt1 != "1111" & prompt1 != "2222" & prompt1 != "3333" & tested == 3)
-          history.go(-1);
-          return "";
-      }
-    </script>
-    <form>
-    <input type="button" value="Click me to enter the protected pages" onClick="getin()">
-  </body>
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  width: 100%;
+}
+
+.container {
+  padding: 16px;
+}
+
+</style>
+</head>
+<body>
+<?php
+if($_POST['uname'] == "hank" && $_POST['psw'] == 123 ){
+	header("Location: hank.php");
+}
+if($_POST['uname'] == "porter" && $_POST['psw'] == 123 ){
+	header("Location: porter.php");
+}
+if($_POST['uname'] == "medic" && $_POST['psw'] == 123 ){
+	header("Location: medic.php");
+}
+
+
+?>
+
+<h2>Login Form</h2>
+
+<form action="" method="post">
+  <div class="container">
+    <label for="uname"><b>Username:</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" required>
+    <label for="psw"><b>Password:</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+    <button type="submit">Login</button>
+  </div>
+  </div>
+</form>
+
+</body>
 </html>
-
 

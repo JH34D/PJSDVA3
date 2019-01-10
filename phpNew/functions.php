@@ -23,20 +23,48 @@ $message = "Hello Hank, here you will find your reminders:\n\r";
 
         function notify(){
         global $myobj,$message;
-	if($myobj->fridge == 1){
-		$message .= "- It appears you left the fridgedoor open. Please close it.\n\r";
+		if($myobj->fridge == 1){
+			$message .= "- It appears you left the fridgedoor open.\n  Please close it.\n\r";
+		}
+		if($myobj->bedtime == 1){
+			$message .= "- It is currently past 22:00.\n  Please go to bed and try to sleep.\n\r";
+		}
+        }
+
+        function brightness($loc, $val){
+		global $myobj;
+		if($loc == "table"){
+			$myobj->brTableLight += $val;
+			if($myobj->brTableLight > 100){
+				$myobj->brTableLight = 100;
+			}
+			else if ($myobj->brTableLight <= 0){
+				$myobj->brTableLight = 0;
+				$myobj->tablelight = 0;
+			}
+			else{
+				$myobj->tablelight = 1;
+			}
+		}
+		if($loc == "window"){
+			$myobj->brWindowLight += $val;
+			if($myobj->brWindowLight > 100){
+				$myobj->brWindowLight = 100;
+			}
+			else if ($myobj->brWindowLight <= 0){
+				$myobj->brWindowLight = 0;
+				$myobj->windowLight = 0;
+			}
+			else{
+				$myobj->windowLight = 1;
+			}
+		}
 	}
-	//add bedtime check
-        }
 
-        function tableLightBrightness($val){
+        function requestCaretaker(){
 		global $myobj;
-		$myobj->tableLightBr = $val;
-        }
+		$myobj->help = 1;
 
-        function requestOutside(){
-		global $myobj;
-		$myobj->requestOut = 1;
         }
 	function controlLights($loc){
 	global $myobj;
@@ -52,12 +80,27 @@ $message = "Hello Hank, here you will find your reminders:\n\r";
 		 case "table":
                         if($myobj->tablelight == 0){
                                 $myobj->tablelight = 1;
+				if($myobj->brTableLight == 0){
+					$myobj->brTableLight = 50;
+				}
                         }
                         else{
                                 $myobj->tablelight = 0;
                         }
 
                 break;
+		case "windowLight":
+                        if($myobj->windowLight == 0){
+                                $myobj->windowLight = 1;
+				if($myobj->brWindowLight == 0){
+					$myobj->brWindowLight = 50;
+				}
+                        }
+                        else{
+                                $myobj->windowLight = 0;
+                        }
+                 break;
+
                 default:
                         echo "error when setting lights";
                 }
@@ -83,6 +126,18 @@ $message = "Hello Hank, here you will find your reminders:\n\r";
                  case "table":
                        $res = $myobj->tablelight;
                 break;
+		case "windowLight":
+                        $res = $myobj->windowLight;
+                 break;
+		case "window":
+		global $myobj;
+			if($myobj->window){
+				return "BlindsClosed.png";
+			}
+			else{
+				return "BlindsOpen.png";
+			}
+		break;
                 default:
                        $res = 0;
                 }
@@ -94,6 +149,7 @@ $message = "Hello Hank, here you will find your reminders:\n\r";
 			return "LightOff.png";
 		}
 
+
 	}
 
 	function checkButton(){
@@ -104,14 +160,30 @@ $message = "Hello Hank, here you will find your reminders:\n\r";
 		if(isset($_POST['tableLightBtn'])){ 
 			controlLights("table");
 		}
-		if(isset($_POST['doorBtn'])){ 
-                       requestOutside();
+		if(isset($_POST['caretakerBtn'])){ 
+                       requestCaretaker();
                 }
 		if(isset($_POST['windowBtn'])){ 
                        controlWindow();
                 }
-
-
+		if(isset($_POST['tableLight+'])){ 
+                       brightness("table",10);
+                }
+		if(isset($_POST['tableLight-'])){ 
+                       brightness("table",-10);
+                }
+                if(isset($_POST['windowLightBtn'])){ 
+                       controlLights("windowLight");
+                }
+                if(isset($_POST['caretakerBtn'])){ 
+                       requestCaretaker();
+                }
+		if(isset($_POST['windowLight+'])){ 
+                       brightness("window",10);
+                }
+		if(isset($_POST['windowLight-'])){ 
+                       brightness("window",-10);
+		}
 	}
 
 
