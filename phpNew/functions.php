@@ -26,7 +26,7 @@ $message = "Hello Hank, here you will find your reminders:\n\r";
 	if($myobj->fridge == 1){
 		$message .= "- It appears you left the fridgedoor open. Please close it.\n\r";
 	}
-
+	//add bedtime check
         }
 
         function tableLightBrightness($val){
@@ -72,6 +72,29 @@ $message = "Hello Hank, here you will find your reminders:\n\r";
         		$myobj->window = 0;
         	}
         }
+
+	function setImg($loc){
+		global $myobj;
+		$res;
+		switch($loc){
+                case "bed":
+                	$res = $myobj->bedlight;
+                 break;
+                 case "table":
+                       $res = $myobj->tablelight;
+                break;
+                default:
+                       $res = 0;
+                }
+
+		if($res){
+			return "LightOn.png";
+		}
+		else{
+			return "LightOff.png";
+		}
+
+	}
 
 	function checkButton(){
 
