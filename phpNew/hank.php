@@ -99,7 +99,7 @@
 
 
 */
-require('functions.php');
+require('functionsHank.php');
 header('Refresh: 10;');
 read(); // The json needs to be read at startup
 checkButton();
