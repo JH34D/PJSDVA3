@@ -8,16 +8,22 @@
 #include "Php.h"
 
 Php::Php() : phpRw("/home/pi/workingDir/output.json"), phpDataJson(nlohmann::json::parse(phpRw.readFile())) {
-	// TODO Auto-generated constructor stub
 
 }
 
 Php::~Php() {
-	// TODO Auto-generated destructor stub
+
 }
 
-void Php::updateDataRead(){
-	phpDataJson = nlohmann::json::parse(phpRw.readFile());
+void Php::updateData(){
+	static nlohmann::json phpDataOld;
+	if(phpDataOld == phpDataJson){
+		return;
+	}
+	else{
+		phpDataJson = nlohmann::json::parse(phpRw.readFile());
+		phpDataOld = phpDataJson;
+	}
 }
 
 void Php::writeToFile(){

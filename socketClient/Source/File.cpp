@@ -36,7 +36,9 @@ string File::readFile(){
 	}
 	else{
 		cerr << "unable to open file for reading" << endl;
-		return "error";
+		nlohmann::json error;
+		error["err"] = 1;
+		return error.dump(); //return string in json format to keep program from failing
 	}
 }
 

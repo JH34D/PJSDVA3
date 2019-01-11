@@ -9,12 +9,11 @@
 using namespace std;
 
 Lamp::Lamp(string ip, int port) : Device(ip, port), motion(0), forcedOn(0), ledStatus(0) {
-	// TODO Auto-generated constructor stub
 
 }
 
 Lamp::~Lamp() {
-	// TODO Auto-generated destructor stub
+
 }
 
 void Lamp::handleActions(){

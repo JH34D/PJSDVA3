@@ -20,7 +20,7 @@ public:
 	Php();
 	virtual ~Php();
 	nlohmann::json phpDataJson;
-	void updateDataRead(); //reads json data from file and stores it in phpDataJson. recommended to call function before checking a json value.
+	void updateData(); //reads json data from file and stores it in phpDataJson. recommended to call function before checking a json value.
 	void writeToFile(); //writes data to json file. Needs to be called to get the changes to interface.
 
 
