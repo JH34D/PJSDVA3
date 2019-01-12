@@ -26,9 +26,9 @@ void Lamp::handleActions(){
 }
 
 void Lamp::lampLight(){
-	int ledState = inputs.value("lampLight", 11) ; // will set 11 as value if lampLight can't be read
+	int ledState = phpCom->phpDataJson.value("brTableLight", 11) ; // will set 11 as value if brTableLight can't be read
 	if (ledState == 11){
-		cerr << "Error while reading lampLight" << endl;
+		cerr << "Error while reading brTableLight" << endl;
 		return;
 	}
 	else {

@@ -103,13 +103,9 @@ void loop() {
           JsonObject& outputsJson = jsonBuffer1.parseObject(request);
           int ledON = outputsJson["lampLight"];
 
-          if (ledON == 1) {
-            pixels.setPixelColor(0, pixels.Color(255, 255, 100));
-            pixels.show();
-          } else {
-            pixels.setPixelColor(0, pixels.Color(0, 0, 0));
-            pixels.show();
-          }
+          
+          pixels.setPixelColor(0, pixels.Color(ledON*25, ledON*25, ledON*10));
+          pixels.show();
           
 
         }
