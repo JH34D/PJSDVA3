@@ -66,6 +66,11 @@ $message = "Hello Hank, here you will find your reminders:\n\r";
 		$myobj->help = 1;
 
         }
+        function emergency(){
+		global $myobj;
+		$myobj->emergency = 1;
+
+        }
 	function controlLights($loc){
 	global $myobj;
                 switch($loc){
@@ -183,6 +188,9 @@ $message = "Hello Hank, here you will find your reminders:\n\r";
                 }
 		if(isset($_POST['windowLight-'])){ 
                        brightness("window",-10);
+		}
+		if(isset($_POST['emergencyBtn'])){ 
+                       emergency();
 		}
 	}
 

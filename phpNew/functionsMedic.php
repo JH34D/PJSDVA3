@@ -54,11 +54,10 @@ $message[0][0]  = "Notifications: ";
 		$message[count($message)][0] = "Hank reported an emergency!";
 		$message[count($message)-1][1] = "emergency";
 	}
-/*
 	if($myobj->aggressive){
 		$message[count($message)][0] = "Hank is currently aggressive.";
 		$message[count($message)-1][1] = "aggressive";
-	}*/
+	}
 	if($myobj->fire){
 		$message[count($message)][0] = "Smoke has been detected in Hank's room!";
 		$message[count($message)-1][1] = "fire";
@@ -71,7 +70,7 @@ $message[0][0]  = "Notifications: ";
 	}
 
 	function resetMsg($pos)
-	{ //add  isset in case of pressing when empty
+	{
 		global $myobj, $message;
 		if(isset($message[$pos][0])){
 			$message[$pos][0] = NULL;
