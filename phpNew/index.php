@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login page</title>
 <style>
 body,html {
 background-color: #D8DBE2;
@@ -53,7 +54,7 @@ if($_POST['uname'] == "medic" && $_POST['psw'] == 123 ){
 
 ?>
 
-<h2>Login Form</h2>
+<h2>Login</h2>
 
 <form action="" method="post">
   <div class="container">
