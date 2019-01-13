@@ -21,9 +21,11 @@ public:
 private:
 	void lampLight();
 	void handleMotion();
+	int latestBrightness;
 	int motion;
 	int forcedOn;
 	bool ledStatus;
+
 
 };
 

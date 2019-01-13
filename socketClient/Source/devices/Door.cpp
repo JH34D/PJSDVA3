@@ -48,21 +48,21 @@ void Door::handleDoor(){
 			}
 	}
 void Door::handleFire(){
-	/*int fireDetector = interDevCom.value("fireDetector", 20); //get value if error return 20
+	int fireDetector = interDevCom.value("fireDetector", 20); //get value if error return 20
 			if (fireDetector == 20){ //check for error
 				cerr << "Error while reading input values. fireDetector could not be found in Json object in function handleFire in class Door" << endl;
 				fireDetector = 0;
 			}
-			if (fireDetector > 450) { //above 450 there is fire detected
+			if (fireDetector) { //fire has been detected and value has been set.
 				outputs["openDoor"] = 10; //if fire then the door opens
 			}
 			else {
 				outputs["openDoor"] = 80;
-			}*/
+			}
 }
 
 void Door::handlePhp(){
-	int doorState = phpCom->phpDataJson.value("doorState", 20) ; // will set 11 as value if brTableLight can't be read
+	int doorState = phpCom->phpDataJson.value("door", 20) ;
 		if (doorState == 20){
 			cerr << "Error while reading doorState" << endl;
 			doorState = 0;

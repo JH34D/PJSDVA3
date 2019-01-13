@@ -26,7 +26,7 @@ protected:
 	sockClient wemosCom; //used for communication with c on the WeMos
 	nlohmann::json inputs; //used to store input data.
 	nlohmann::json outputs; //used to store data to set output
-	static Php *phpCom;
+	static Php *phpCom; //const?
 	static nlohmann::json interDevCom; //json object shared between all classes derived from device. Used to allow different classes to set information for other classes.
 private:
 	void initConnection();

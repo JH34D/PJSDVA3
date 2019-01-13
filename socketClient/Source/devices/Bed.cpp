@@ -27,7 +27,7 @@ void Bed::handleActions(){
 	phpCom->writeToFile();
 }
 
-void Bed::outOfBed(){ //TODO add php notification to hank between 22 00 and 22 30, notfication to caretaker if not in bed after 22 30
+void Bed::outOfBed(){
 	time_t rawTime = time(0);
 	struct tm* currentTime;
 	currentTime = localtime(&rawTime);
@@ -50,6 +50,7 @@ void Bed::outOfBed(){ //TODO add php notification to hank between 22 00 and 22 3
 			else {
 				phpCom->phpDataJson["bedtime"] = 0;
 			}
+
 			if(prevInBedState){
 				timeOutOfBed = time(0);
 			}
@@ -63,22 +64,36 @@ void Bed::outOfBed(){ //TODO add php notification to hank between 22 00 and 22 3
 }
 void Bed::bedLight(){
 	int switchLed = inputs.value("switchLed", 2);
+	int phpSwitch = phpCom->phpDataJson.value("bedlight", 2);
 	if (switchLed == 2){
 		cerr << "Error while reading switchLed" << endl;
 		return;
 	}
-	else if(switchLed){
+	else if (phpSwitch == 2){
+		cerr << "Error while reading php bedswitch state" << endl;
+		return;
+	}
+	if(phpSwitch){
+		ledStatus = 1;
+		phpCom->phpDataJson["bedlight"] = (int)ledStatus;
+	}
+	if(!phpSwitch){
+		ledStatus = 0;
+		phpCom->phpDataJson["bedlight"] = (int)ledStatus;
+	}
+	if(switchLed){
 		ledStatus = !ledStatus;
-		outputs["ledState"] = ledStatus;
+		phpCom->phpDataJson["bedlight"] = (int)ledStatus;
 		if(ledStatus){
 			ledOnTime = time(0);
 		}
-
 	}
+
 	if(ledStatus && getTimePassedInMinutes(ledOnTime) >= 15.00){ //if light has been on for 15 minutes, turn off
 		ledStatus = 0;
-		outputs["ledState"] = ledStatus;
 	}
+
+	outputs["ledState"] = ledStatus;
 
 }
 

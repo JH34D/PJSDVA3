@@ -58,7 +58,7 @@ bed1.handleActions();
 //door1.handleActions();
 //fridge1.handleActions();
 //lamp1.handleActions();
-
+sleep(2);
 }
 //cin.get();
 return 0;

@@ -42,13 +42,14 @@ void Column::fireAlarm(){
 			fireDetector = 0;
 			//return;
 		}
-		if (fireDetector < 600) { //above 450 fire is detected
+		if (fireDetector < 600) { //above 600 fire is detected
 			outputs["fireAlarm"] = 0;
+			interDevCom["fireDetector"] = 0;// if no fire reset value.
 			//todo send to PHP no fire
 		}
 		else {
 			outputs["fireAlarm"] = 3; //if fire then fire alarm
-			//interDevCom["fireDetector"] = 451;// if fire set alarm sensor value to 451 so the door can open.
+			interDevCom["fireDetector"] = 1;// if fire set value.
 			//todo send to PHP fire
 		}
 }

@@ -11,13 +11,14 @@ Device::Device(string ip, int port):wemosCom(ip, port) {
 
 	initConnection();
 
-
 }
 
 Device::~Device() {
 	// TODO Auto-generated destructor stub
 }
 Php* Device::phpCom = new Php;
+nlohmann::json Device::interDevCom;
+
 
 void Device::initConnection(){
 	wemosCom.createSock();
