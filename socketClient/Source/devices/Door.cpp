@@ -46,7 +46,7 @@ void Door::handleDoor(){
 			}
 	}
 void Door::handleFire(){
-	int fireDetector = inputs.value("fireDetector", 20); //get value if error return 1050
+	int fireDetector = interDevCom.value("fireDetector", 20); //get value if error return 20
 			if (fireDetector == 20){ //check for error
 				cerr << "Error while reading input values. fireDetector could not be found in Json object in function handleFire in class Door" << endl;
 				fireDetector = 0;
@@ -60,10 +60,5 @@ void Door::handleFire(){
 }
 
 void Door::handlePhp(){
-	int phpNumber;
-			if (phpNumber == 11){
-				outputs["phpOpen"] = 10;
-			}else if (phpNumber == 22){
-				outputs["phpOpen"] = 80;
-			}
+
 }
