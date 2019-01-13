@@ -18,6 +18,7 @@ public:
 	void handleActions();
 private:
 	int potmeterLedOld;
+	int ledOld;
 	void handleLed();
 	void handleSun();
 	void handlePHP();

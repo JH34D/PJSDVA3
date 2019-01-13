@@ -13,7 +13,8 @@ using namespace std;
 using namespace nlohmann;
 
 Column::Column(string ip, int port):Device(ip,port){
-
+	phpCom->phpDataJson["fire"] = 0; //create entry in json file to guarantee it exists.
+	phpCom->writeToFile();
 }
 
 Column::~Column(){
@@ -27,11 +28,11 @@ void Column::handleActions(){
 	 * set outputs
 	 * return json for php?
 	 */
-
+	phpCom->updateData();
 	requestInputs();
 	fireAlarm();
-
 	setOutputs();
+	phpCom->writeToFile();
 }
 
 void Column::fireAlarm(){
@@ -45,11 +46,12 @@ void Column::fireAlarm(){
 		if (fireDetector < 600) { //above 600 fire is detected
 			outputs["fireAlarm"] = 0;
 			interDevCom["fireDetector"] = 0;// if no fire reset value.
-			//todo send to PHP no fire
+			phpCom->phpDataJson["fire"] = 0;
 		}
 		else {
 			outputs["fireAlarm"] = 3; //if fire then fire alarm
 			interDevCom["fireDetector"] = 1;// if fire set value.
+			phpCom->phpDataJson["fire"] = 1;
 			//todo send to PHP fire
 		}
 }
