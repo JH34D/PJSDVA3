@@ -48,7 +48,7 @@ void Column::fireAlarm(){
 		}
 		else {
 			outputs["fireAlarm"] = 3; //if fire then fire alarm
-			interDevCom["fireDetector"] = 451;// if fire set alarm sensor value to 451 so the door can open.
+			//interDevCom["fireDetector"] = 451;// if fire set alarm sensor value to 451 so the door can open.
 			//todo send to PHP fire
 		}
 }
