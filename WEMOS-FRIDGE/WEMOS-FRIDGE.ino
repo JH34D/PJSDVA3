@@ -1,4 +1,5 @@
 
+#include <math.h>
 #include <ESP8266WiFi.h> //libs for wifi
 #include <ESP8266WiFiAP.h>
 #include <ESP8266WiFiGeneric.h>
@@ -12,12 +13,21 @@
 #include <WiFiUdp.h>
 #include <Wire.h> //lib for i2c
 #include <ArduinoJson.h> //json https://github.com/bblanchon/ArduinoJson, installed using the arduino library manager.
-#include <Servo.h>
-Servo myservo;
+
+
 //bronnen: Voorbeeldcode BB, https://techtutorialsx.com/2018/06/02/esp8266-arduino-socket-server/
 
 #define I2C_SCL    D1
 #define I2C_SDA    D2
+
+// resistance at 25 degrees C
+#define THERMISTORNOMINAL 10000      
+// temp. for nominal resistance (almost always 25 C)
+#define TEMPERATURENOMINAL 25   
+// The beta coefficient of the thermistor (usually 3000-4000)
+#define BCOEFFICIENT 3435
+// the value of the 'other' resistor
+#define SERIESRESISTOR 10000    
 
 //Wifi gegevens
 char ssid[] = "MichaelPi";
@@ -25,19 +35,19 @@ char pass[] = "P@ssw0rd";
 WiFiServer wifiServerWemos(3333); //create object of wifiserver which will listen on the specified port
 char receivedData[4096]; //create array to store received data
 uint16_t rdIndex = 0; //index for receivedData array
+bool buttonPressed = false;
 
+unsigned int Rs = 120000; // Misschien 10000////////////////////
+double Vcc = 3.1;///////////////////////////////////////////////
 
-
-int pos = 0;
 void setup() {
   // put your setup code here, to run once:
-  myservo.attach(D5);
   Wire.begin();
   Serial.begin(115200);
   setIOConfig(15); //select I/O mode
   setIOOutput(0); //start with all outputs 0
   //set static ip outside dhcp scope
-  IPAddress ip(192, 168, 3, 15);
+  IPAddress ip(192, 168, 3, 14);
   IPAddress gateway(192, 168, 3, 90);
   IPAddress subnet(255, 255, 255, 0);
   WiFi.config(ip, gateway, subnet);
@@ -80,10 +90,12 @@ void loop() {
       if (receivedData[0] != '\0') { //data has been placed in array because the first char isnt the end of the string
         receivedData[rdIndex] = '\0'; //Add terminate string indicator at end of chars
         if (receivedData[0] == 'i') { //indicates request for input
-          StaticJsonBuffer<400> jsonBuffer2;
+          StaticJsonBuffer<200> jsonBuffer2;
           JsonObject& sensorsJson = jsonBuffer2.createObject();
-          sensorsJson.set("doorButton", readIO());
+          sensorsJson.set("fridgeSwitch", readIO());
+          sensorsJson.set("tempSensor", temperature());
           
+          Serial.println(temperature());
           
           String response;
           sensorsJson.printTo(response);
@@ -93,34 +105,23 @@ void loop() {
         else if (receivedData[0] == 'o') { //indicates request for output
           char* request = receivedData + 2; //stip request indicator and space
           Serial.println("request is: " + (String) request);
-          StaticJsonBuffer<400> jsonBuffer1;
+          StaticJsonBuffer<200> jsonBuffer1;
           JsonObject& outputsJson = jsonBuffer1.parseObject(request);
-          bool openDoor = outputsJson["openDoor"]; //variable = value of key chair in json
-          int emergencyOpen = outputsJson["emergencyOpen"];
-         // int phpOpen = outputsJson["phpOpen"];
-         
-          if (openDoor) {
-          for (pos = 0; pos <= 10; pos += 1) { // goes from 0 degrees to 90 degrees in steps
-    myservo.write(10);              // tell servo to go to position in variable 'pos'
-    delay(15);                       // waits 15ms for the servo to reach the position 
- }
- delay(5000);
-  
-          for (pos = 10; pos <= 80; pos += 1) { // goes from 90 degrees to 0 degrees
-    myservo.write(80);              // tell servo to go to position in variable 'pos'
-    delay(15);                       // waits 15ms for the servo to reach the position
-  }
-  openDoor = 0;
+          bool fridgeDoor = outputsJson["fridgeDoor"];
+          int fridgeTemp = outputsJson["fridgeTemp"];
+
+          if (fridgeDoor){
+            Serial.print("fridge is open");
+          }else
+            Serial.print("fridge is closed");
+            
+          if (fridgeTemp == 1){
+            setIOOutput(3);
+            digitalWrite(D5,HIGH);
+          }else if (fridgeTemp == 0){
+            setIOOutput(0);
+            digitalWrite(D5,LOW);
           }
-
-///////////////////////emergencyOpen
-         
-         myservo.write(emergencyOpen);
-          
-///////////////////////PHP Handeling
-
-         // myservo.write(phpOpen);
-          
         }
         rdIndex = 0; //reset index
         receivedData[0] = '\0'; //set start of string as end of string
@@ -170,5 +171,31 @@ unsigned int readAdc() {
   anin1 = anin1 << 8;
   anin1 = anin1 | Wire.read();
   return anin0;
+}
+int sensorValue() {
+  int val = 0;
+  for(int i = 0; i < 20; i++) {
+    val += readAdc();
+    delay(1);
+  }
+
+  val = val / 20;
+  return val;
+}
+
+float temperature(){
+  float average = sensorValue() ;
+  average = 1023 / average - 1;
+  average = SERIESRESISTOR / average;
+  
+  float steinhart;
+  steinhart = average / THERMISTORNOMINAL;     // (R/Ro)
+  steinhart = log(steinhart);                  // ln(R/Ro)
+  steinhart /= BCOEFFICIENT;                   // 1/B * ln(R/Ro)
+  steinhart += 1.0 / (TEMPERATURENOMINAL + 273.15); // + (1/To)
+  steinhart = 1.0 / steinhart;                 // Invert
+  steinhart -= 273.15;                         // convert to C
+ return steinhart;
+ 
 }
 
