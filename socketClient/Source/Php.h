@@ -15,15 +15,13 @@
 
 class Php {
 private:
-	File phpRw;
+	File phpRw; //used to write to filesystem
 public:
 	Php();
 	virtual ~Php();
-	nlohmann::json phpDataJson;
+	nlohmann::json phpDataJson; //objects that holds data for the interface i JSON format
 	void updateData(); //reads json data from file and stores it in phpDataJson. recommended to call function before checking a json value.
 	void writeToFile(); //writes data to json file. Needs to be called to get the changes to interface.
-
-
 };
 
 #endif /* PHP_H_ */

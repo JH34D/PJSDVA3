@@ -16,13 +16,13 @@ using namespace std;
 class File {
 public:
 	//File();
-	File(const char*);
+	File(const char*); //constructor takes path to file
 	virtual ~File();
 
 	//void openFile();
 
-	string readFile();
-	void writeToFile(nlohmann::json);
+	string readFile(); //opens file, returns data in file
+	void writeToFile(nlohmann::json); //takes json object, converts to string and writes to file
 	//setInUse(bool);
 
 
@@ -30,8 +30,6 @@ private:
 	fstream *currentFile;
 	const char* path;
 	void closeFile();
-
-
 };
 
 #endif /* FILE_H_ */

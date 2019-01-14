@@ -29,22 +29,11 @@ using namespace std;
  * close/destroy
  */
 
-//create object
-sockClient::sockClient()
-{
-	sock = -1; //default -1 to indicate it hasnt been started yet
-	port = 0; //variable to store port number
-	address = ""; //variable to store address
-
-	//server;
-}
-
 sockClient::sockClient(string addr, int prt)
 {
 	sock = -1; //default -1 to indicate it hasnt been started yet
 	port = prt; //variable to store port number
 	address = addr; //variable to store address
-	//server;
 }
 
 //create socket
@@ -111,7 +100,7 @@ string sockClient::receiveFromServer() //receive
 {
 
 	struct timeval tv; //timeout settings for receive timeout
-		tv.tv_sec = 3; //seconds
+		tv.tv_sec = 1; //seconds
 		tv.tv_usec = 0; //mircoseconds
 
 	setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv));

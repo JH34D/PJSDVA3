@@ -92,7 +92,7 @@ void Bed::bedLight(){
 	if(ledStatus && getTimePassedInMinutes(ledOnTime) >= 15.00){ //if light has been on for 15 minutes, turn off
 		ledStatus = 0;
 	}
-
+	//phpCom->phpDataJson["bedlight"] = (int)ledStatus;
 	outputs["ledState"] = ledStatus;
 
 }

@@ -21,14 +21,13 @@ public:
 	Chair(string ip, int port);
 	virtual ~Chair();
 	void handleActions();
-	void temp();
 private:
-	void handleBedtime();
-	void handleAggression();
-	bool aggressionTracker[10];
-	time_t lastMeasurement;
-	int trackerIndex;
-	double getTimePassedInSeconds();
+	void handleBedtime(); //checks if user in is chair after bedtime
+	void handleAggression(); //check if user is restless
+	bool aggressionTracker[10]; //store data about sit state
+	time_t lastMeasurement; //track time
+	int trackerIndex; //index for array
+	double getTimePassedInSeconds(); //see name
 
 
 };

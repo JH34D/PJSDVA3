@@ -23,10 +23,6 @@ private:
 	void handleMotion();
 	int latestBrightness;
 	int motion;
-	int forcedOn;
-	bool ledStatus;
-
-
 };
 
 #endif /* DEVICES_LAMP_H_ */

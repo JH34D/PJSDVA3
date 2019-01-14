@@ -15,14 +15,14 @@ public:
 	virtual ~Bed();
 	void handleActions();
 private:
-	void outOfBed();
-	void bedLight();
-	bool ledStatus = false;
-	bool inBed;
-	bool prevInBedState;
-	time_t timeOutOfBed;
-	time_t ledOnTime;
-	double getTimePassedInMinutes(time_t prev);
+	void outOfBed(); //checks if the user is laying down
+	void bedLight(); //handles actions for the bedtime
+	bool ledStatus = false; //used to track ledstate
+	bool inBed; //state indicates if user is laying
+	bool prevInBedState; //used to track changes
+	time_t timeOutOfBed; //used to time
+	time_t ledOnTime; //used to time
+	double getTimePassedInMinutes(time_t prev); //used to compare times
 
 };
 

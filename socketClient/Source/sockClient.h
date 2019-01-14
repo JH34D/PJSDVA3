@@ -26,26 +26,16 @@ private:
 	string address; //ip
 	int port; //port
 	int sock; //socket
-	sockaddr_in server;
+	sockaddr_in server; //hint
+	void setHint(); //function to set hint
 
-	void setHint();
-
-
-public: //sockclient pointer? parameter or this.?
-
-
-
-
-
-	sockClient();
-	sockClient(string, int);
-	int createSock();
-	//no return so void? \/
-	bool connectToServer();//sockaddr_in); //connect to socket
-	bool sendToServer(string data); //send
-	string receiveFromServer(); //receive
-
-	void closeSocket();
+public:
+	sockClient(string, int); //constructor
+	int createSock(); //set socket
+	bool connectToServer();//call sethint and connect to socket
+	bool sendToServer(string data); //send data
+	string receiveFromServer(); //receive data
+	void closeSocket(); //close socket currently not used
 };
 
 #endif /* SOCKCLIENT_H_ */
