@@ -53,11 +53,13 @@ void Door::handleFire(){
 				cerr << "Error while reading input values. fireDetector could not be found in Json object in function handleFire in class Door" << endl;
 				fireDetector = 0;
 			}
-			if (fireDetector) { //fire has been detected and value has been set.
-				outputs["openDoor"] = 10; //if fire then the door opens
+			if (fireDetector ==1) { //fire has been detected and value has been set.
+				outputs["emergencyOpen"] = 10; //if fire then the door opens
+				phpCom->phpDataJson["door"] = 1;
 			}
-			else {
-				outputs["openDoor"] = 80;
+			else if (fireDetector == 0 && outputs["emergencyOpen"] == 10){
+				outputs["emergencyOpen"] = 80;
+				phpCom->phpDataJson["door"] = 0;
 			}
 }
 
@@ -69,7 +71,9 @@ void Door::handlePhp(){
 		}
 		if (doorState == 1){
 			outputs["phpOpen"] = 10;
+			phpCom->phpDataJson["door"] = 1;
 		}else if (doorState == 0 && outputs["phpOpen"] == 10){
 			outputs["phpOpen"] = 80;
+			phpCom->phpDataJson["door"] = 0;
 		}
 }
