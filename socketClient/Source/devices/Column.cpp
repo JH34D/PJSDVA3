@@ -43,7 +43,7 @@ void Column::fireAlarm(){
 			fireDetector = 0;
 			//return;
 		}
-		if (fireDetector < 600) { //above 600 fire is detected
+		if (fireDetector < 750) { //above 600 fire is detected
 			outputs["fireAlarm"] = 0;
 			interDevCom["fireDetector"] = 0;// if no fire reset value.
 			phpCom->phpDataJson["fire"] = 0;

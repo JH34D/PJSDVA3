@@ -42,7 +42,7 @@ void Chair::handleBedtime(){
 	time_t rawTime = time(0);
 	struct tm* currentTime;
 	currentTime = localtime(&rawTime);
-	//currentTime->tm_hour = 22; //testing.
+	currentTime->tm_hour = 22; //testing.
 	if (sits > 700 && (currentTime->tm_hour > 21 || currentTime->tm_hour < 7)){
 		outputs["vibrate"] = 1;
 	}

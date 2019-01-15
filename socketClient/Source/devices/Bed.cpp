@@ -7,7 +7,7 @@
 
 #include "Bed.h"
 
-Bed::Bed(string ip, int port) : Device(ip, port), inBed(0), prevInBedState(0), timeOutOfBed(0), ledOnTime(0) {
+Bed::Bed(string ip, int port) : Device(ip, port), inBed(0), prevInBedState(0), timeOutOfBed(time(0)), ledOnTime(0) {
 	phpCom->phpDataJson["bedtime"] = 0; //create entry in json file to guarantee it exists.
 	phpCom->phpDataJson["notInBed"] = 0;
 	phpCom->writeToFile();
@@ -31,7 +31,7 @@ void Bed::outOfBed(){
 	time_t rawTime = time(0);
 	struct tm* currentTime;
 	currentTime = localtime(&rawTime);
-	currentTime->tm_hour = 22; currentTime->tm_min = 15;//testing
+	//currentTime->tm_hour = 22; currentTime->tm_min = 35;//testing
 	if(currentTime->tm_hour > 21 || currentTime->tm_hour < 7){
 		int lays = inputs.value("pressure", 1250); //get value if error return 1250
 		if (lays == 1250){ //check for error
@@ -41,6 +41,7 @@ void Bed::outOfBed(){
 		if(lays > 700){
 			inBed = 1;
 			phpCom->phpDataJson["bedtime"] = 0;
+			phpCom->phpDataJson["notInBed"] = 0;
 		}
 		else{
 			inBed = 0;
@@ -55,7 +56,7 @@ void Bed::outOfBed(){
 				timeOutOfBed = time(0);
 			}
 		}
-		if(inBed == 0 && getTimePassedInMinutes(timeOutOfBed) >= 30.00){ //if hanks is out of bed longer than 30 minutes at night, notify
+		if(inBed == 0 && getTimePassedInMinutes(timeOutOfBed) >= 30){ //if hanks is out of bed longer than 30 minutes at night, notify
 			phpCom->phpDataJson["notInBed"] = 1;
 		}
 		prevInBedState = inBed;
@@ -73,12 +74,17 @@ void Bed::bedLight(){
 		cerr << "Error while reading php bedswitch state" << endl;
 		return;
 	}
+	/*
 	if(phpSwitch){
 		ledStatus = 1;
 		phpCom->phpDataJson["bedlight"] = (int)ledStatus;
+	}*/
+	if(phpSwitch){
+		ledStatus = phpSwitch;
+		phpCom->phpDataJson["bedlight"] = (int)ledStatus;
 	}
-	if(!phpSwitch){
-		ledStatus = 0;
+	else {
+		ledStatus = phpSwitch;
 		phpCom->phpDataJson["bedlight"] = (int)ledStatus;
 	}
 	if(switchLed){
@@ -89,8 +95,9 @@ void Bed::bedLight(){
 		}
 	}
 
-	if(ledStatus && getTimePassedInMinutes(ledOnTime) >= 15.00){ //if light has been on for 15 minutes, turn off
+	if(ledStatus && getTimePassedInMinutes(ledOnTime) >= 1){ //if light has been on for 15 minutes, turn off
 		ledStatus = 0;
+		phpCom->phpDataJson["bedlight"] = (int)ledStatus;
 	}
 	//phpCom->phpDataJson["bedlight"] = (int)ledStatus;
 	outputs["ledState"] = ledStatus;

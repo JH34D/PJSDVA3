@@ -18,9 +18,11 @@ Fridge::~Fridge() {
 void Fridge::handleActions(){
 
 	requestInputs();
+	phpCom->updateData();
 	handleFridge();
 	handleTemp();
 	setOutputs();
+	phpCom->writeToFile();
 }
 void Fridge::handleFridge(){
 	int fridgeSwitch = inputs.value("fridgeSwitch", 20); //get value if error return
@@ -31,10 +33,11 @@ void Fridge::handleFridge(){
 				}
 				if (fridgeSwitch == 14) {
 					outputs["fridgeDoor"] = 1;
+					phpCom->phpDataJson["fridge"] = 1;
 				}
 				else {
-
 					outputs["fridgeDoor"] = 0;
+					phpCom->phpDataJson["fridge"] = 0;
 				}
 }
 void Fridge::handleTemp(){
