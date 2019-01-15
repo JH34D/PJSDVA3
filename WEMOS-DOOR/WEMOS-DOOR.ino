@@ -76,15 +76,15 @@ void loop() {
     Serial.println(clientPort);
 
     while (client.connected()) { //while client connected
-      
+
       if (receivedData[0] != '\0') { //data has been placed in array because the first char isnt the end of the string
         receivedData[rdIndex] = '\0'; //Add terminate string indicator at end of chars
         if (receivedData[0] == 'i') { //indicates request for input
           StaticJsonBuffer<400> jsonBuffer2;
           JsonObject& sensorsJson = jsonBuffer2.createObject();
           sensorsJson.set("doorButton", readIO());
-          
-          
+
+
           String response;
           sensorsJson.printTo(response);
           client.print(response);
@@ -96,47 +96,50 @@ void loop() {
           StaticJsonBuffer<400> jsonBuffer1;
           JsonObject& outputsJson = jsonBuffer1.parseObject(request);
           bool openDoor = outputsJson["openDoor"]; //variable = value of key chair in json
-          int emergencyOpen = outputsJson["emergencyOpen"];
-         // int phpOpen = outputsJson["phpOpen"];
-         
-          if (openDoor) {
-          for (pos = 0; pos <= 10; pos += 1) { // goes from 0 degrees to 90 degrees in steps
-    myservo.write(10);              // tell servo to go to position in variable 'pos'
-    delay(15);                       // waits 15ms for the servo to reach the position 
- }
- delay(5000);
-  
-          for (pos = 10; pos <= 80; pos += 1) { // goes from 90 degrees to 0 degrees
-    myservo.write(80);              // tell servo to go to position in variable 'pos'
-    delay(15);                       // waits 15ms for the servo to reach the position
-  }
-  openDoor = 0;
+          bool openDoorFire = outputsJson["openDoorFire"];
+          //int emergencyOpen = outputsJson["emergencyOpen"];
+          bool openDoorPhp = outputsJson["openDoorPhp"];
+
+          if (openDoor || openDoorFire || openDoorPhp) {
+            for (pos = 0; pos <= 10; pos += 1) { // goes from 0 degrees to 90 degrees in steps
+              myservo.write(10);              // tell servo to go to position in variable 'pos'
+              delay(15);                       // waits 15ms for the servo to reach the position
+            }
+          }
+          //delay(5000);
+          else {
+            for (pos = 10; pos <= 80; pos += 1) { // goes from 90 degrees to 0 degrees
+              myservo.write(80);              // tell servo to go to position in variable 'pos'
+              delay(15);                       // waits 15ms for the servo to reach the position
+            }
+            openDoor = 0;
           }
 
-///////////////////////emergencyOpen
-         
-         myservo.write(emergencyOpen);
-          
-///////////////////////PHP Handeling
 
-         // myservo.write(phpOpen);
-          
-        }
-        rdIndex = 0; //reset index
-        receivedData[0] = '\0'; //set start of string as end of string
-      }
+        ///////////////////////emergencyOpen
 
-      while (client.available() > 0) { //while data from client availabel
-        char c = client.read(); //read char
-        receivedData[rdIndex++] = c; //add char to "string"
+        // myservo.write(emergencyOpen);
+
+        ///////////////////////PHP Handeling
+
+        // myservo.write(phpOpen);
+
       }
-      delay(10); //small delay between data
+      rdIndex = 0; //reset index
+      receivedData[0] = '\0'; //set start of string as end of string
     }
-    //passed the while loop which means the client disconnected
-    client.stop();
-    Serial.println("Client disconnected");
 
+    while (client.available() > 0) { //while data from client availabel
+      char c = client.read(); //read char
+      receivedData[rdIndex++] = c; //add char to "string"
+    }
+    delay(10); //small delay between data
   }
+  //passed the while loop which means the client disconnected
+  client.stop();
+  Serial.println("Client disconnected");
+
+}
 
 }
 
