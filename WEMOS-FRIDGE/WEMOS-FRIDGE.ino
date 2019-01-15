@@ -30,7 +30,7 @@
 #define SERIESRESISTOR 10000    
 
 //Wifi gegevens
-char ssid[] = "MichaelPi";
+char ssid[] = "Korsakov";
 char pass[] = "P@ssw0rd";
 WiFiServer wifiServerWemos(3333); //create object of wifiserver which will listen on the specified port
 char receivedData[4096]; //create array to store received data
