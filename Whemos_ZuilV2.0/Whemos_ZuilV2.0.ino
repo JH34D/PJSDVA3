@@ -21,7 +21,7 @@
 
 
 //Wifi gegevens
-char ssid[] = "piBFJ";
+char ssid[] = "Korsakov";
 char pass[] = "P@ssw0rd";
 
 WiFiServer wifiServerWemos(3333); //create object of wifiserver which will listen on the specified port
