@@ -67,7 +67,10 @@ void setup() {
 }
 
 void loop() {
-
+  
+  int analog0;
+  int analog1;
+  
   //client handling
   WiFiClient client = wifiServerWemos.available(); //check for and accept connections
   
@@ -87,9 +90,10 @@ void loop() {
         if (receivedData[0] == 'i') { //indicates request for input
           StaticJsonBuffer<200> jsonBuffer2;
           JsonObject& sensorsJson = jsonBuffer2.createObject();
+
           
-          sensorsJson.set("windowLDR", readAdc0(0)); //analog input from LDR
-          sensorsJson.set("potmeterLed", readAdc0(1)); //analog input from potmeter
+          sensorsJson.set("windowLDR", analog0); //analog input from LDR
+          sensorsJson.set("potmeterLed", analog1); //analog input from potmeter
            
           String response;
           sensorsJson.printTo(response);
@@ -125,6 +129,8 @@ void loop() {
 
       }
       delay(10); //small delay between data
+      analog0 = readAdc0(0);
+      analog1 = readAdc0(1);
     }
     //passed the while loop which means the client disconnected
     client.stop();
@@ -139,6 +145,11 @@ void setIOConfig(unsigned int input) { //add adress as parameter. define address
   Wire.beginTransmission(0x38);
   Wire.write(byte(0x03));
   Wire.write(byte(input/*0x0F*/));
+  Wire.endTransmission();
+
+  Wire.beginTransmission(0x36);
+  Wire.write(byte(0xA2));          
+  Wire.write(byte(0x03));  
   Wire.endTransmission();
 }
 
@@ -178,7 +189,5 @@ unsigned int readAdc0(bool welke) {
     return anin1;
   }
 }
-
-
 
 
